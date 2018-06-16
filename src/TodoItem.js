@@ -8,13 +8,13 @@ class TodoItem extends Component {
   render() {
     return <li>
       <div className={this.props.props.item.className}>
-        <img id={this.props.props.item.statusBtnID} src={icon_undone} />
+        <img id={this.props.props.item.statusBtnID} src={icon_undone} alt={this.props.props.item.statusBtnID} />
         <span>{this.props.content}</span>
       </div>
       <div className={this.props.props.options.className}>
-        <img id={this.props.props.options.upBtnID} src={icon_up} />
-        <img id={this.props.props.options.downBtnID} src={icon_down} />
-        <img id={this.props.props.options.deleteBtnID} src={icon_delete} />
+        <img id={this.props.props.options.upBtnID} src={icon_up} alt={this.props.props.options.upBtnID} />
+        <img id={this.props.props.options.downBtnID} src={icon_down} alt={this.props.props.options.downBtnID} />
+        <img id={this.props.props.options.deleteBtnID} src={icon_delete} alt={this.props.props.options.deleteBtnID} />
       </div>
     </li>
   }
