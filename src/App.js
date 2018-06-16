@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import './App.css'
+import TodoInput from './TodoInput'
 import icon_undone from './icon/square.svg'
 import icon_delete from './icon/bin.svg'
 import icon_up from './icon/up.svg'
 import icon_down from './icon/down.svg'
-import icon_add from './icon/add.svg'
 
 var link = document.createElement('link')
-link.href = "//at.alicdn.com/t/font_709826_rpbfifb41x.css"
+link.href = '//at.alicdn.com/t/font_709826_rpbfifb41x.css'
 document.head.appendChild(link)
 
 class App extends Component {
@@ -28,7 +28,6 @@ class App extends Component {
         },
       ]
     }
-    // this.
   }
   render() {
     let todos = this.state.todoList.map((item, index) => {
@@ -46,17 +45,15 @@ class App extends Component {
     })
 
     return (
-      <div className="App">
-        <header className="todo-header">
-          {/* <img src={logo} className="todo-logo" alt="logo" /> */}
-          <h1 className="todo-title">我的待办</h1>
+      <div className='App'>
+        <header className='todo-header'>
+          {/* <img src={logo} className='todo-logo' alt='logo' /> */}
+          <h1 className='todo-title'>我的待办</h1>
         </header>
-        <div className="todo-list">
+        <div className='todo-list'>
           <ul>{todos}</ul>
         </div>
-        <div className="todo-inputWrapper">
-          <img id='add' src={icon_add} /><input type="text" maxlength="40" placeholder="添加待办事项" />
-        </div>
+        <TodoInput className='todo-inputWrapper' id='add' content={this.state.newTodo} />
       </div>
     )
   }
