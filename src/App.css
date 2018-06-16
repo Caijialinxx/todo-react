@@ -1,10 +1,10 @@
 .App {
   max-width: 540px;
   min-width: 360px;
-  min-height: 600px;
   margin: 0 auto;
   box-shadow: 0 0 3px 1px #BDBDBD;
-  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .todo-header {
@@ -21,15 +21,15 @@
 
 .todo-list {
   color: #757575;
-  font-family: Courier, monospace;
   font-size: 28px;
   font-weight: bold;
   line-height: 418px;
   text-align: center;
+  overflow-y: scroll;
+  max-height: 440px;
 }
 .todo-list li {
   color: black;
-  font-family: Courier, monospace;
   font-size: 16px;
   font-weight: normal;
   line-height: 16px;
@@ -70,10 +70,6 @@
 
 .todo-inputWrapper {
   cursor: pointer;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
   border-top: 1px solid #BDBDBD;
   padding: 16px;
   display: flex;
