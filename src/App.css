@@ -6,7 +6,7 @@ ul,ol {
 
 .App {
   max-width: 540px;
-  min-width: 380px;
+  min-width: 360px;
   min-height: 600px;
   margin: 0 auto;
   box-shadow: 0 0 3px 1px #BDBDBD;
@@ -44,43 +44,55 @@ ul,ol {
   padding: 16px 0;
   border-bottom: 1px solid #BDBDBD;
   display: flex;
-  align-items: center;
+  justify-content: space-between;
 }
 .todo-list li:last-child {
   border-bottom: none;
 }
 .todo-list .item {
-  width: 80%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
 }
 .todo-list .item img {
   width: 16px;
-  vertical-align: -0.16em;
-  margin-right: 16px; 
+}
+.todo-list .item span {
+  margin-left: 12px;
+  white-space: nowrap;
 }
 .todo-list .options {
-  width: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .todo-list .options img {
-  width: 33.3%;
-  min-width: 16px;
-  max-height: 16px;
-  vertical-align: -0.16em;
-  padding-left: 6%;
-  box-sizing: border-box;
+  cursor: pointer;
+  width: 16px;
+  margin-left: 12px;
 }
 
-.todo-input {
+.todo-inputWrapper {
+  cursor: pointer;
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   border-top: 1px solid #BDBDBD;
-}
-.todo-input > input {
   padding: 16px;
+  display: flex;
+  align-items: center;
+}
+.todo-inputWrapper img {
+  width: 16px;
+}
+.todo-inputWrapper > input {
+  padding-left: 16px;
   outline: none;
   border: none;
-  width: 100%;
+  width: calc(100% - 16px);
   font-size: 16px;
   box-sizing: border-box;
 }

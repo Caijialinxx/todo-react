@@ -18,7 +18,7 @@ class App extends Component {
       todoList: [
         {
           id: '1',
-          content: 'Learn How to Use.',
+          content: 'Learn How to Use. dfafdsf',
           status: 'undone'
         },
         {
@@ -54,8 +54,8 @@ class App extends Component {
         <div className="todo-list">
           <ul>{todos}</ul>
         </div>
-        <div className="todo-input">
-          <input type="text" placeholder="添加待办事项" />
+        <div className="todo-inputWrapper">
+          <img id='add' src={icon_add} /><input type="text" maxlength="40" placeholder="添加待办事项" />
         </div>
       </div>
     )
