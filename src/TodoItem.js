@@ -28,6 +28,7 @@ class TodoItem extends Component {
     this.props.onToggle.call(undefined, e.currentTarget, { now: this.props.todo.status, undone: icon_undone, done: icon_done });
   }
   delete(e){
+    this.props.todo.status = 'delete'
     this.props.onDelete.call(undefined, e.target.parentElement.parentElement)
   }
 }
