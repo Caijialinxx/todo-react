@@ -15,7 +15,7 @@ class TodoItem extends Component {
       <div className={this.props.className.options}>
         <img src={icon_up} alt='up' />
         <img src={icon_down} alt='down' />
-        <img src={icon_delete} alt='delete' />
+        <img src={icon_delete} alt='delete' onClick={this.delete.bind(this)} />
       </div>
     </li>
   }
@@ -26,6 +26,9 @@ class TodoItem extends Component {
       this.props.todo.status = 'undone'
     }
     this.props.onToggle.call(undefined, e.currentTarget, { now: this.props.todo.status, undone: icon_undone, done: icon_done });
+  }
+  delete(e){
+    this.props.onDelete.call(undefined, e.target.parentElement.parentElement)
   }
 }
 

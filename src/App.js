@@ -27,12 +27,9 @@ class App extends Component {
   }
   render() {
     let todos = this.state.todoList.map((item) => {
-      return <TodoItem onToggle={this.changeStatus.bind(this)} todo={item}
-        className={{
-          item: 'itemWrapper',
-          options: 'optionsWrapper'
-        }
-        }
+      return <TodoItem todo={item} className={{ item: 'itemWrapper', options: 'optionsWrapper' }}
+        onToggle={this.changeStatus.bind(this)}
+        onDelete={this.deleteItem.bind(this)}
       />
     })
 
@@ -71,13 +68,16 @@ class App extends Component {
   }
   changeStatus(target, status) {
     this.setState(this.state)
-    if(status.now === 'done'){
+    if (status.now === 'done') {
       $(target.children[0])[0].src = status.done
       $(target.children[1]).addClass('done')
     } else {
       $(target.children[0])[0].src = status.undone
       $(target.children[1]).removeClass('done')
     }
+  }
+  deleteItem(target){
+    $(target).remove()
   }
 }
 
