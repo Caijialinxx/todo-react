@@ -5,8 +5,13 @@ class TodoInput extends Component {
   render() {
     return <div className={this.props.className}>
       <img id={this.props.id} src={icon_add} alt={this.props.id} />
-      <input type="text" defaultValue={this.props.content} maxLength="40" placeholder="添加待办事项" />
+      <input type="text" defaultValue={this.props.content} onKeyUp={this.submit} maxLength="40" placeholder="添加待办事项" />
     </div>
+  }
+  submit(e) {
+    if (e.keyCode === 13) {
+      console.log('submit!!!')
+    }
   }
 }
 
