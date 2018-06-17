@@ -77,6 +77,7 @@ class App extends Component {
     }
   }
   deleteItem(target){
+    this.setState(this.state)
     $(target).remove()
   }
 }
