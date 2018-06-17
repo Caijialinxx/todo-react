@@ -25,34 +25,35 @@ class App extends Component {
     }
   }
   render() {
-    let todos = this.state.todoList.map((item, index) => {
-      return <TodoItem props={{
-        item: {
-          className: 'item',
-          imgID: 'status'
-        },
-        options: {
-          className: 'options',
-          upBtnID: 'upBtn',
-          downBtnID: 'downBtn',
-          deleteBtnID: 'deleteBtn'
-        }
+    let todos = this.state.todoList.map((item) => {
+      return <TodoItem itemProps={{
+        className: 'item',
+        imgID: 'status',
+        content: item.content
       }
-      } content={item.content} />
+      } optionsProps={{
+        className: 'options',
+        upBtnID: 'upBtn',
+        downBtnID: 'downBtn',
+        deleteBtnID: 'deleteBtn'
+      }
+      } />
     })
 
     return (
       <div className='App'>
         <header className='todo-header'>
-          {/* <img src={logo} className='todo-logo' alt='logo' /> */}
           <h1 className='todo-title'>我的待办</h1>
         </header>
         <div className='todo-list'>
           <ul>{todos}</ul>
         </div>
-        <TodoInput className='todo-inputWrapper' id='add' content={this.state.newTodo} />
+        <TodoInput className='todo-inputWrapper' id='add' content={this.state.newTodo} onSubmit={this.addItem.bind(this)} />
       </div>
     )
+  }
+  addItem() {
+    console.log('add')
   }
 }
 
