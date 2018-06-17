@@ -48,12 +48,30 @@ class App extends Component {
         <div className='todo-list'>
           <ul>{todos}</ul>
         </div>
-        <TodoInput className='todo-inputWrapper' id='add' content={this.state.newTodo} onSubmit={this.addItem.bind(this)} />
+        <TodoInput className='todo-inputWrapper' id='add'
+          content={this.state.newTodo}
+          onSubmit={this.addItem.bind(this)}
+          onChange={this.change.bind(this)}
+        />
       </div>
     )
   }
   addItem() {
-    console.log('add')
+    this.state.todoList.push({
+      id: 5,
+      content: this.state.newTodo,
+      status: 'undone'
+    })
+    this.setState({
+      newTodo: '',
+      todoList: this.state.todoList
+    })
+  }
+  change(value) {
+    this.setState({
+      newTodo: value,
+      todoList: this.state.todoList
+    })
   }
 }
 
