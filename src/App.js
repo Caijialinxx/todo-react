@@ -22,16 +22,28 @@ class App extends Component {
           content: 'Try to Add.',
           status: 'undone'
         },
+        {
+          id: '3',
+          content: 'Learn How to Use. dfafdsf',
+          status: 'delete'
+        },
+        {
+          id: '4',
+          content: 'Try to Adddd.',
+          status: 'done'
+        },
       ]
     }
   }
   render() {
-    let todos = this.state.todoList.map((item) => {
-      return <TodoItem todo={item} className={{ item: 'itemWrapper', options: 'optionsWrapper' }}
-        onToggle={this.changeStatus.bind(this)}
-        onDelete={this.deleteItem.bind(this)}
-      />
-    })
+    let todos = this.state.todoList
+      .filter((item) => item.status !== 'delete')
+      .map((item) => {
+        return <TodoItem todo={item} className={{ item: 'itemWrapper', options: 'optionsWrapper' }}
+          onToggle={this.changeStatus.bind(this)}
+          onDelete={this.deleteItem.bind(this)}
+        />
+      })
 
     return (
       <div className='App'>
@@ -76,9 +88,10 @@ class App extends Component {
       $(target.children[1]).removeClass('done')
     }
   }
-  deleteItem(target){
-    this.setState(this.state)
+  deleteItem(target) {
     $(target).remove()
+    this.state.todoList.status = 'delete'
+    this.setState(this.state)
   }
 }
 

@@ -7,10 +7,17 @@ import icon_down from './icon/down.svg'
 
 class TodoItem extends Component {
   render() {
+    let statusImg
+    if (this.props.todo.status === 'undone') {
+      statusImg = icon_undone
+    } else if(this.props.todo.status === 'done') {
+      statusImg = icon_done
+    }
+
     return <li>
       <div className={this.props.className.item} onClick={this.toggle.bind(this)}>
-        <img src={icon_undone} alt='status' />
-        <span>{this.props.todo.content}</span>
+        <img className={this.props.todo.status} src={statusImg} alt='status' />
+        <span className={this.props.todo.status}>{this.props.todo.content}</span>
       </div>
       <div className={this.props.className.options}>
         <img src={icon_up} alt='up' />
@@ -22,13 +29,12 @@ class TodoItem extends Component {
   toggle(e) {
     if (this.props.todo.status === 'undone') {
       this.props.todo.status = 'done'
-    } else {
+    } else if(this.props.todo.status === 'done') {
       this.props.todo.status = 'undone'
     }
     this.props.onToggle.call(undefined, e.currentTarget, { now: this.props.todo.status, undone: icon_undone, done: icon_done });
   }
   delete(e){
-    this.props.todo.status = 'delete'
     this.props.onDelete.call(undefined, e.target.parentElement.parentElement)
   }
 }
