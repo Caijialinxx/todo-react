@@ -43,26 +43,32 @@
 .todo-list li:last-child {
   border-bottom: none;
 }
-.todo-list .item {
+.todo-list .itemWrapper {
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   overflow: hidden;
 }
-.todo-list .item img {
+.todo-list .itemWrapper img {
   width: 16px;
 }
-.todo-list .item span {
+.todo-list .itemWrapper span {
   margin-left: 12px;
   white-space: nowrap;
+  color: black;
+  text-decoration: none;
 }
-.todo-list .options {
+.todo-list .itemWrapper span.done {
+  color: #757575;
+  text-decoration: line-through;
+}
+.todo-list .optionsWrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.todo-list .options img {
+.todo-list .optionsWrapper img {
   cursor: pointer;
   width: 16px;
   margin-left: 12px;

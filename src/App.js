@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import $ from 'jquery'
 import './App.css'
 import TodoInput from './TodoInput'
 import TodoItem from './TodoItem'
@@ -26,18 +27,13 @@ class App extends Component {
   }
   render() {
     let todos = this.state.todoList.map((item) => {
-      return <TodoItem itemProps={{
-        className: 'item',
-        imgID: 'status',
-        content: item.content
-      }
-      } optionsProps={{
-        className: 'options',
-        upBtnID: 'upBtn',
-        downBtnID: 'downBtn',
-        deleteBtnID: 'deleteBtn'
-      }
-      } />
+      return <TodoItem onToggle={this.changeStatus.bind(this)} todo={item}
+        className={{
+          item: 'itemWrapper',
+          options: 'optionsWrapper'
+        }
+        }
+      />
     })
 
     return (
@@ -51,7 +47,7 @@ class App extends Component {
         <TodoInput className='todo-inputWrapper' id='add'
           content={this.state.newTodo}
           onSubmit={this.addItem.bind(this)}
-          onChange={this.change.bind(this)}
+          onChange={this.changeNewtodo.bind(this)}
         />
       </div>
     )
@@ -67,11 +63,21 @@ class App extends Component {
       todoList: this.state.todoList
     })
   }
-  change(value) {
+  changeNewtodo(value) {
     this.setState({
       newTodo: value,
       todoList: this.state.todoList
     })
+  }
+  changeStatus(target, status) {
+    this.setState(this.state)
+    if(status.now === 'done'){
+      $(target.children[0])[0].src = status.done
+      $(target.children[1]).addClass('done')
+    } else {
+      $(target.children[0])[0].src = status.undone
+      $(target.children[1]).removeClass('done')
+    }
   }
 }
 
