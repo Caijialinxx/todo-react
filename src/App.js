@@ -88,9 +88,8 @@ class App extends Component {
       $(target.children[1]).removeClass('done')
     }
   }
-  deleteItem(target) {
-    $(target).remove()
-    this.state.todoList.status = 'delete'
+  deleteItem(todoTarget) {
+    todoTarget.status = 'delete'
     this.setState(this.state)
   }
 }
