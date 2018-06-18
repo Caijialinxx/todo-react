@@ -44,7 +44,7 @@ class App extends Component {
     let todos = this.state.todoList
       .filter((item) => item.status !== 'delete')
       .map((item) => {
-        return <TodoItem todo={item} className={{ item: 'itemWrapper', options: 'optionsWrapper' }}
+        return <TodoItem todo={item}
           onToggle={this.changeStatus.bind(this)}
           onDelete={this.deleteItem.bind(this)}
         />
