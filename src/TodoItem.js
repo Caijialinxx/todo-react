@@ -27,12 +27,7 @@ class TodoItem extends Component {
     </li>
   }
   toggle(e) {
-    if (this.props.todo.status === 'undone') {
-      this.props.todo.status = 'done'
-    } else if(this.props.todo.status === 'done') {
-      this.props.todo.status = 'undone'
-    }
-    this.props.onToggle.call(undefined, e.currentTarget, { now: this.props.todo.status, undone: icon_undone, done: icon_done });
+    this.props.onToggle.call(undefined, e.currentTarget, { todo: this.props.todo, undone: icon_undone, done: icon_done });
   }
   delete(){
     this.props.onDelete.call(undefined, this.props.todo)
