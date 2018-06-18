@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import './TodoInput.css'
 import icon_add from './icon/add.svg'
 
 class TodoInput extends Component {
   render() {
-    return <div className={this.props.className}>
-      <img id={this.props.id} src={icon_add} alt={this.props.id} />
+    return <div className='inputWrapper'>
+      <img id={this.props.id} src={icon_add} alt='add' />
       <input type="text"
         value={this.props.content}      // 若使用defaultValue则会导致提交之后输入框不为空
         onKeyUp={this.submit.bind(this)}

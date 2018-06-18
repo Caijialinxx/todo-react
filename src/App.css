@@ -28,22 +28,3 @@
   overflow-y: scroll;
   max-height: 440px;
 }
-
-.todo-inputWrapper {
-  cursor: pointer;
-  border-top: 1px solid #BDBDBD;
-  padding: 16px;
-  display: flex;
-  align-items: center;
-}
-.todo-inputWrapper img {
-  width: 16px;
-}
-.todo-inputWrapper > input {
-  padding-left: 16px;
-  outline: none;
-  border: none;
-  width: calc(100% - 16px);
-  font-size: 16px;
-  box-sizing: border-box;
-}
