@@ -28,51 +28,6 @@
   overflow-y: scroll;
   max-height: 440px;
 }
-.todo-list li {
-  color: black;
-  font-size: 16px;
-  font-weight: normal;
-  line-height: 16px;
-  text-align: left;
-  margin: 0 16px;
-  padding: 16px 0;
-  border-bottom: 1px solid #BDBDBD;
-  display: flex;
-  justify-content: space-between;
-}
-.todo-list li:last-child {
-  border-bottom: none;
-}
-.todo-list .itemWrapper {
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  overflow: hidden;
-}
-.todo-list .itemWrapper img {
-  width: 16px;
-}
-.todo-list .itemWrapper span {
-  margin-left: 12px;
-  white-space: nowrap;
-  color: black;
-  text-decoration: none;
-}
-.todo-list .itemWrapper span.done {
-  color: #757575;
-  text-decoration: line-through;
-}
-.todo-list .optionsWrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.todo-list .optionsWrapper img {
-  cursor: pointer;
-  width: 16px;
-  margin-left: 12px;
-}
 
 .todo-inputWrapper {
   cursor: pointer;

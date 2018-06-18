@@ -14,7 +14,7 @@ class App extends Component {
       todoList: [
         {
           id: '1',
-          content: 'Learn How to Use. dfafdsf',
+          content: 'Learn How to Use. dfafhhhdsf',
           status: 'undone'
         },
         {
@@ -31,6 +31,11 @@ class App extends Component {
           id: '4',
           content: 'Try to Adddd.',
           status: 'done'
+        },
+        {
+          id: '',
+          content: '来一个中文的，看看效果',
+          status: 'undone'
         },
       ]
     }

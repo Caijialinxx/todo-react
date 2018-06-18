@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './TodoItem.css'
 import icon_undone from './icon/square.svg'
 import icon_done from './icon/square_ok.svg'
 import icon_delete from './icon/bin.svg'
@@ -15,11 +16,11 @@ class TodoItem extends Component {
     }
 
     return <li>
-      <div className={this.props.className.item} onClick={this.toggle.bind(this)}>
-        <img className={this.props.todo.status} src={statusImg} alt='status' />
+      <div className='itemWrapper' onClick={this.toggle.bind(this)}>
+        <img src={statusImg} alt='status' />
         <span className={this.props.todo.status}>{this.props.todo.content}</span>
       </div>
-      <div className={this.props.className.options}>
+      <div className='optionsWrapper'>
         <img src={icon_up} alt='up' />
         <img src={icon_down} alt='down' />
         <img src={icon_delete} alt='delete' onClick={this.delete.bind(this)} />
