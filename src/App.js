@@ -3,6 +3,7 @@ import $ from 'jquery'
 import './App.css'
 import TodoInput from './TodoInput'
 import TodoItem from './TodoItem'
+import Scrollbar from './Scrollbar'
 import 'normalize.css'
 import './reset.css'
 
@@ -45,7 +46,7 @@ class App extends Component {
       .filter((item) => item.status !== 'delete')
       .map((item) => {
         return <TodoItem todo={item}
-          onToggle={this.changeStatus.bind(this)}
+          onToggle={this.changeItemStatus.bind(this)}
           onDelete={this.deleteItem.bind(this)}
         />
       })
@@ -56,6 +57,7 @@ class App extends Component {
           <h1 className='todo-title'>我的待办</h1>
         </header>
         <div className='todo-list'>
+          <Scrollbar />
           <ul>{todos}</ul>
         </div>
         <TodoInput className='todo-inputWrapper' id='add'
@@ -65,6 +67,27 @@ class App extends Component {
         />
       </div>
     )
+  }
+  componentDidMount() {
+    this.showScroll()
+  }
+  componentDidUpdate() {
+    this.showScroll()
+  }
+  /* *******以下为自定义函数******** */
+  showScroll() {
+    let contentHeight = $('.todo-list ul').outerHeight(true),
+      scrollTop = undefined
+    if (contentHeight > 440) {
+      $('.scrollWrapper').css({ display: 'block' })
+      $('.scrollBar').css({ height: `${440 * 440 / contentHeight}px` })
+      $('.todo-list').scroll(function () {
+        scrollTop = $('.todo-list').scrollTop()
+        $('.scrollBar').css({ top: `${scrollTop / contentHeight * 100}%` })
+      })
+    } else {
+      $('.scrollWrapper').css({ display: 'none' })
+    }
   }
   addItem() {
     this.state.todoList.push({
@@ -83,7 +106,7 @@ class App extends Component {
       todoList: this.state.todoList
     })
   }
-  changeStatus(eventTarget, todoTarget) {
+  changeItemStatus(eventTarget, todoTarget) {
     if (todoTarget.todo.status === 'undone') {
       todoTarget.todo.status = 'done'
       $(eventTarget.children[0])[0].src = todoTarget.done
