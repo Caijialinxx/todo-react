@@ -15,27 +15,32 @@ class App extends Component {
       todoList: [
         {
           id: '1',
-          content: 'Learn How to Use. dfafhhhdsf',
+          content: 'localStorage',
           status: 'undone'
         },
         {
           id: '2',
-          content: 'Try to Add.',
+          content: 'leanCloud',
           status: 'undone'
         },
         {
           id: '3',
-          content: 'Learn How to Use. dfafdsf',
-          status: 'delete'
+          content: '登录和注册',
+          status: 'undone'
         },
         {
           id: '4',
-          content: 'Try to Adddd.',
-          status: 'done'
+          content: 'UP 功能',
+          status: 'undone'
         },
         {
-          id: '',
-          content: '来一个中文的，看看效果',
+          id: '5',
+          content: 'DOWN 功能',
+          status: 'undone'
+        },
+        {
+          id: '6',
+          content: 'Beautify it!',
           status: 'undone'
         },
       ]
@@ -47,6 +52,10 @@ class App extends Component {
       .map((item) => {
         return <TodoItem todo={item}
           onToggle={this.changeItemStatus.bind(this)}
+          onTop={this.toTop.bind(this)}
+          onUp={this.moveUp.bind(this)}
+          onDown={this.moveDown.bind(this)}
+          onBottom={this.toBottom.bind(this)}
           onDelete={this.deleteItem.bind(this)}
         />
       })
@@ -117,6 +126,38 @@ class App extends Component {
       $(eventTarget.children[1]).removeClass('done')
     }
     this.setState(this.state)
+  }
+  toTop(eventTarget) {
+    let index = $(eventTarget).index()
+    if (index === 0) {
+      alert('已经是第一个啦！')
+    } else {
+      $('li').eq(0).before($(eventTarget))
+    }
+  }
+  moveUp(eventTarget) {
+    let index = $(eventTarget).index()
+    if (index === 0) {
+      alert('已经是第一个啦！')
+    } else {
+      $('li').eq(index - 1).before($(eventTarget))
+    }
+  }
+  moveDown(eventTarget) {
+    let index = $(eventTarget).index(), lastIndex = $(eventTarget).parent().children().length - 1
+    if (index === lastIndex) {
+      alert('已经是最后一个啦！')
+    } else {
+      $('li').eq(index + 1).after($(eventTarget))
+    }
+  }
+  toBottom(eventTarget) {
+    let index = $(eventTarget).index(), lastIndex = $(eventTarget).parent().children().length - 1
+    if (index === lastIndex) {
+      alert('已经是最后一个啦！')
+    } else {
+      $('li').eq(lastIndex).after($(eventTarget))
+    }
   }
   deleteItem(todoTarget) {
     todoTarget.status = 'delete'
