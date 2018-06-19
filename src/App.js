@@ -52,10 +52,7 @@ class App extends Component {
       .map((item) => {
         return <TodoItem todo={item}
           onToggle={this.changeItemStatus.bind(this)}
-          onTop={this.toTop.bind(this)}
-          onUp={this.moveUp.bind(this)}
-          onDown={this.moveDown.bind(this)}
-          onBottom={this.toBottom.bind(this)}
+          onMove={this.moveAction.bind(this)}
           onDelete={this.deleteItem.bind(this)}
         />
       })
@@ -127,36 +124,36 @@ class App extends Component {
     }
     this.setState(this.state)
   }
-  toTop(eventTarget) {
-    let index = $(eventTarget).index()
-    if (index === 0) {
-      alert('已经是第一个啦！')
-    } else {
-      $('li').eq(0).before($(eventTarget))
-    }
-  }
-  moveUp(eventTarget) {
-    let index = $(eventTarget).index()
-    if (index === 0) {
-      alert('已经是第一个啦！')
-    } else {
-      $('li').eq(index - 1).before($(eventTarget))
-    }
-  }
-  moveDown(eventTarget) {
-    let index = $(eventTarget).index(), lastIndex = $(eventTarget).parent().children().length - 1
-    if (index === lastIndex) {
-      alert('已经是最后一个啦！')
-    } else {
-      $('li').eq(index + 1).after($(eventTarget))
-    }
-  }
-  toBottom(eventTarget) {
-    let index = $(eventTarget).index(), lastIndex = $(eventTarget).parent().children().length - 1
-    if (index === lastIndex) {
-      alert('已经是最后一个啦！')
-    } else {
-      $('li').eq(lastIndex).after($(eventTarget))
+  moveAction(eventTarget, action) {
+    let currentElem = $(eventTarget).parents('li'),
+      allLi = $('li'),
+      index = $(currentElem).index(),
+      lastIndex = $(currentElem).parent().children().length - 1
+
+    if (action === 'toTop') {
+      if (index === 0) {
+        alert('已经是第一个啦！')
+      } else {
+        $(allLi).eq(0).before($(currentElem))
+      }
+    } else if (action === 'moveUp') {
+      if (index === 0) {
+        alert('已经是第一个啦！')
+      } else {
+        $(allLi).eq(index - 1).before($(currentElem))
+      }
+    } else if (action === 'moveDown') {
+      if (index === lastIndex) {
+        alert('已经是最后一个啦！')
+      } else {
+        $(allLi).eq(index + 1).after($(currentElem))
+      }
+    } else if (action === 'toBottom') {
+      if (index === lastIndex) {
+        alert('已经是最后一个啦！')
+      } else {
+        $(allLi).eq(lastIndex).after($(currentElem))
+      }
     }
   }
   deleteItem(todoTarget) {

@@ -13,40 +13,40 @@ class TodoItem extends Component {
     let statusImg
     if (this.props.todo.status === 'undone') {
       statusImg = icon_undone
-    } else if(this.props.todo.status === 'done') {
+    } else if (this.props.todo.status === 'done') {
       statusImg = icon_done
     }
 
     return <li>
-      <div className='itemWrapper' onClick={this.toggle.bind(this)}>
-        <img src={statusImg} alt='status' />
-        <span className={this.props.todo.status}>{this.props.todo.content}</span>
-      </div>
-      <div className='optionsWrapper'>
-        <img src={icon_top} alt='top' onClick={this.top.bind(this)} />
-        <img src={icon_up} alt='up' onClick={this.up.bind(this)} />
-        <img src={icon_down} alt='down' onClick={this.down.bind(this)} />
-        <img src={icon_bottom} alt='bottom' onClick={this.bottom.bind(this)} />
-        <img src={icon_delete} alt='delete' onClick={this.delete.bind(this)} />
-      </div>
+        <div className='itemWrapper' onClick={this.toggle.bind(this)}>
+          <img src={statusImg} alt='status' />
+          <span className={this.props.todo.status}>{this.props.todo.content}</span>
+        </div>
+        <div className='optionsWrapper'>
+          <img src={icon_top} alt='top' onClick={this.top.bind(this)} />
+          <img src={icon_up} alt='up' onClick={this.up.bind(this)} />
+          <img src={icon_down} alt='down' onClick={this.down.bind(this)} />
+          <img src={icon_bottom} alt='bottom' onClick={this.bottom.bind(this)} />
+          <img src={icon_delete} alt='delete' onClick={this.delete.bind(this)} />
+        </div>
     </li>
   }
   toggle(e) {
     this.props.onToggle.call(undefined, e.currentTarget, { todo: this.props.todo, undone: icon_undone, done: icon_done });
   }
-  top(e){
-    this.props.onTop.call(undefined, e.currentTarget.parentElement.parentElement)
+  top(e) {
+    this.props.onMove.call(undefined, e.currentTarget, 'toTop')
   }
-  up(e){
-    this.props.onUp.call(undefined, e.currentTarget.parentElement.parentElement)
+  up(e) {
+    this.props.onMove.call(undefined, e.currentTarget, 'moveUp')
   }
-  down(e){
-    this.props.onDown.call(undefined, e.currentTarget.parentElement.parentElement)
+  down(e) {
+    this.props.onMove.call(undefined, e.currentTarget, 'moveDown')
   }
-  bottom(e){
-    this.props.onBottom.call(undefined, e.currentTarget.parentElement.parentElement)
+  bottom(e) {
+    this.props.onMove.call(undefined, e.currentTarget, 'toBottom')
   }
-  delete(){
+  delete() {
     this.props.onDelete.call(undefined, this.props.todo)
   }
 }
