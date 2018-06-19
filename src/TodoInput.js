@@ -7,15 +7,14 @@ class TodoInput extends Component {
     return <div className='inputWrapper'>
       <img id={this.props.id} src={icon_add} alt='add' />
       <input type="text"
-        value={this.props.content}      // 若使用defaultValue则会导致提交之后输入框不为空
+        value={this.props.content}
         onKeyUp={this.submit.bind(this)}
         onChange={this.change.bind(this)}
         maxLength="40" placeholder="添加待办事项" />
     </div>
   }
   submit(e) {
-    if (e.keyCode === 13) {
-      console.log('subimit')
+    if (e.target.value.trim() !== '' && e.keyCode === 13) {
       this.props.onSubmit.call()
     }
   }
