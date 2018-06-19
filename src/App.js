@@ -49,6 +49,7 @@ class App extends Component {
   }
   componentDidUpdate() {
     this.showScroll()
+    localStore.save('todoList', this.state.todoList)
   }
   /* *******以下为自定义函数******** */
   showScroll() {
@@ -74,14 +75,12 @@ class App extends Component {
       newTodo: '',
       todoList: this.state.todoList
     })
-    localStore.save('todoList', this.state.todoList)
   }
   changeNewtodo(value) {
     this.setState({
       newTodo: value,
       todoList: this.state.todoList
     })
-    localStore.save('todoList', this.state.todoList)
   }
   changeItemStatus(eventTarget, todoTarget) {
     if (todoTarget.todo.status === 'undone') {
@@ -94,12 +93,10 @@ class App extends Component {
       $(eventTarget.children[1]).removeClass('done')
     }
     this.setState(this.state)
-    localStore.save('todoList', this.state.todoList)
   }
   deleteItem(todoTarget) {
     todoTarget.status = 'delete'
     this.setState(this.state)
-    localStore.save('todoList', this.state.todoList)
   }
   moveAction(eventTarget, action) {
     let currentElem = $(eventTarget).parents('li'),
