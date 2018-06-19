@@ -4,6 +4,7 @@ import './App.css'
 import TodoInput from './TodoInput'
 import TodoItem from './TodoItem'
 import Scrollbar from './Scrollbar'
+import * as localStore from './localStore'
 import 'normalize.css'
 import './reset.css'
 
@@ -12,38 +13,39 @@ class App extends Component {
     super(props)
     this.state = {
       newTodo: '',
-      todoList: [
-        {
-          id: '1',
-          content: 'localStorage',
-          status: 'undone'
-        },
-        {
-          id: '2',
-          content: 'leanCloud',
-          status: 'undone'
-        },
-        {
-          id: '3',
-          content: '登录和注册',
-          status: 'undone'
-        },
-        {
-          id: '4',
-          content: 'UP 功能',
-          status: 'undone'
-        },
-        {
-          id: '5',
-          content: 'DOWN 功能',
-          status: 'undone'
-        },
-        {
-          id: '6',
-          content: 'Beautify it!',
-          status: 'undone'
-        },
-      ]
+      todoList: localStore.load('todoList') || []
+      // todoList: [
+      //   {
+      //     id: '1',
+      //     content: 'localStorage',
+      //     status: 'undone'
+      //   },
+      //   {
+      //     id: '2',
+      //     content: 'leanCloud',
+      //     status: 'undone'
+      //   },
+      //   {
+      //     id: '3',
+      //     content: '登录和注册',
+      //     status: 'undone'
+      //   },
+      //   {
+      //     id: '4',
+      //     content: 'UP 功能',
+      //     status: 'undone'
+      //   },
+      //   {
+      //     id: '5',
+      //     content: 'DOWN 功能',
+      //     status: 'undone'
+      //   },
+      //   {
+      //     id: '6',
+      //     content: 'Beautify it!',
+      //     status: 'undone'
+      //   },
+      // ]
     }
   }
   render() {
@@ -105,12 +107,14 @@ class App extends Component {
       newTodo: '',
       todoList: this.state.todoList
     })
+    localStore.save('todoList', this.state.todoList)
   }
   changeNewtodo(value) {
     this.setState({
       newTodo: value,
       todoList: this.state.todoList
     })
+    localStore.save('todoList', this.state.todoList)
   }
   changeItemStatus(eventTarget, todoTarget) {
     if (todoTarget.todo.status === 'undone') {
@@ -123,6 +127,7 @@ class App extends Component {
       $(eventTarget.children[1]).removeClass('done')
     }
     this.setState(this.state)
+    localStore.save('todoList', this.state.todoList)
   }
   moveAction(eventTarget, action) {
     let currentElem = $(eventTarget).parents('li'),
@@ -159,6 +164,7 @@ class App extends Component {
   deleteItem(todoTarget) {
     todoTarget.status = 'delete'
     this.setState(this.state)
+    localStore.save('todoList', this.state.todoList)
   }
 }
 
