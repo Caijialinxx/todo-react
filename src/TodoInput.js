@@ -5,8 +5,8 @@ import icon_add from './icon/add.svg'
 class TodoInput extends Component {
   render() {
     return <div className='inputWrapper'>
-      <img id={this.props.id} src={icon_add} alt='add' />
-      <input type="text"
+      <label htmlFor='add'><img src={icon_add} alt='add' /></label>
+      <input id='add' type="text"
         value={this.props.content}
         onKeyUp={this.submit.bind(this)}
         onChange={this.change.bind(this)}

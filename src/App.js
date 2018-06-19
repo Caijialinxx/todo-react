@@ -13,39 +13,7 @@ class App extends Component {
     super(props)
     this.state = {
       newTodo: '',
-      todoList: localStore.load('todoList') || []
-      // todoList: [
-      //   {
-      //     id: '1',
-      //     content: 'localStorage',
-      //     status: 'undone'
-      //   },
-      //   {
-      //     id: '2',
-      //     content: 'leanCloud',
-      //     status: 'undone'
-      //   },
-      //   {
-      //     id: '3',
-      //     content: '登录和注册',
-      //     status: 'undone'
-      //   },
-      //   {
-      //     id: '4',
-      //     content: 'UP 功能',
-      //     status: 'undone'
-      //   },
-      //   {
-      //     id: '5',
-      //     content: 'DOWN 功能',
-      //     status: 'undone'
-      //   },
-      //   {
-      //     id: '6',
-      //     content: 'Beautify it!',
-      //     status: 'undone'
-      //   },
-      // ]
+      todoList: localStore.load('todoList') || [{ content: 'hi, 我的小宝贝在吗', status: 'undone' }]
     }
   }
   render() {
@@ -99,7 +67,6 @@ class App extends Component {
   }
   addItem() {
     this.state.todoList.push({
-      id: 5,
       content: this.state.newTodo,
       status: 'undone'
     })
@@ -126,6 +93,11 @@ class App extends Component {
       $(eventTarget.children[0])[0].src = todoTarget.undone
       $(eventTarget.children[1]).removeClass('done')
     }
+    this.setState(this.state)
+    localStore.save('todoList', this.state.todoList)
+  }
+  deleteItem(todoTarget) {
+    todoTarget.status = 'delete'
     this.setState(this.state)
     localStore.save('todoList', this.state.todoList)
   }
@@ -160,11 +132,6 @@ class App extends Component {
         $(allLi).eq(lastIndex).after($(currentElem))
       }
     }
-  }
-  deleteItem(todoTarget) {
-    todoTarget.status = 'delete'
-    this.setState(this.state)
-    localStore.save('todoList', this.state.todoList)
   }
 }
 
