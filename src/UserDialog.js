@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './UserDialog.css'
+import $ from 'jquery'
 
 class UserDialog extends Component {
   render() {
@@ -7,9 +8,9 @@ class UserDialog extends Component {
       <div className='userDialog-wrapper'>
         <div className='userDialog'>
           <nav>
-            <a href='javascript::void(0)'>注　册</a>
+            <a onClick={this.switchAction.bind(this)} href='javascript:void(0)'>注　册</a>
             <div className='divided'></div>
-            <a className='active' href='javascript::void(0)'>登　录</a>
+            <a onClick={this.switchAction.bind(this)} className='active' href='javascript:void(0)'>登　录</a>
           </nav>
           <div className='form-wrapper'>
             <form id='signupForm'>
@@ -39,6 +40,18 @@ class UserDialog extends Component {
         </div>
       </div>
     )
+  }
+  switchAction(e) {
+    $(e.target).addClass('active')
+    $(e.target).siblings().removeClass('active')
+    console.log($(e.target).html())
+    if ($(e.target).html() === '注　册') {
+      $('#signupForm').css({ display: 'flex' })
+      $('#loginForm').css({ display: 'none' })
+    } else {
+      $('#signupForm').css({ display: 'none' })
+      $('#loginForm').css({ display: 'flex' })
+    }
   }
 }
 
