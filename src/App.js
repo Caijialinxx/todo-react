@@ -4,7 +4,6 @@ import './App.css'
 import TodoInput from './TodoInput'
 import TodoItem from './TodoItem'
 import Scrollbar from './Scrollbar'
-import * as localStore from './localStore'
 import 'normalize.css'
 import './reset.css'
 
@@ -13,7 +12,7 @@ class App extends Component {
     super(props)
     this.state = {
       newTodo: '',
-      todoList: localStore.load('todoList') || [{ content: 'hi, 我的小宝贝在吗', status: 'undone' }]
+      todoList: [{ content: 'hi, 我的小宝贝在吗', status: 'undone' }]
     }
   }
   render() {
@@ -49,7 +48,6 @@ class App extends Component {
   }
   componentDidUpdate() {
     this.showScroll()
-    localStore.save('todoList', this.state.todoList)
   }
   /* *******以下为自定义函数******** */
   showScroll() {
