@@ -1,11 +1,11 @@
-.App {
-  max-width: 540px;
-  min-width: 360px;
-  margin: 0 auto;
-  box-shadow: 0 0 3px 1px #BDBDBD;
+.todo-wrapper {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
+  max-width: 540px;
+  min-width: 360px;
   overflow: hidden;
+  box-shadow: 0 0 3px 1px #BDBDBD;
   position: relative;
 }
 

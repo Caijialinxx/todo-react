@@ -6,6 +6,7 @@ import TodoItem from './TodoItem'
 import Scrollbar from './Scrollbar'
 import 'normalize.css'
 import './reset.css'
+import UserDialog from './UserDialog'
 
 class App extends Component {
   constructor(props) {
@@ -28,18 +29,21 @@ class App extends Component {
 
     return (
       <div className='App'>
-        <header className='todo-header'>
-          <h1 className='todo-title'>我的待办</h1>
-        </header>
-        <div className='todo-list'>
-          <Scrollbar />
-          <ul>{todos}</ul>
+        <UserDialog />
+        <div className='todo-wrapper'>
+          <header className='todo-header'>
+            <h1 className='todo-title'>我的待办</h1>
+          </header>
+          <div className='todo-list'>
+            <Scrollbar />
+            <ul>{todos}</ul>
+          </div>
+          <TodoInput className='todo-inputWrapper' id='add'
+            content={this.state.newTodo}
+            onSubmit={this.addItem.bind(this)}
+            onChange={this.changeNewtodo.bind(this)}
+          />
         </div>
-        <TodoInput className='todo-inputWrapper' id='add'
-          content={this.state.newTodo}
-          onSubmit={this.addItem.bind(this)}
-          onChange={this.changeNewtodo.bind(this)}
-        />
       </div>
     )
   }
