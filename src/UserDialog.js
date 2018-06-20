@@ -7,31 +7,33 @@ class UserDialog extends Component {
       <div className='userDialog-wrapper'>
         <div className='userDialog'>
           <nav>
-            <a href='javascript::void(0)'>注　册</a><div className='divided'></div><a className='active' href='javascript::void(0)'>登　录</a>
+            <a href='javascript::void(0)'>注　册</a>
+            <div className='divided'></div>
+            <a className='active' href='javascript::void(0)'>登　录</a>
           </nav>
           <div className='form-wrapper'>
-            <form id='signup'>
+            <form id='signupForm'>
               <div>
-                <label htmlFor='email'>邮箱:</label>
-                <input id='email' type='text' placeholder='请设置邮箱作为登录账号' />
+                <label>邮箱:</label>
+                <input type='text' placeholder='请设置邮箱作为登录账号' />
               </div>
               <div>
-                <label htmlFor='password'>密码:</label>
-                <input id='password' type='password' />
+                <label>密码:</label>
+                <input type='password' />
               </div>
-              <input id='submit' type='submit' value='注册' />
+              <input id='signupBtn' type='submit' value='注册' />
             </form>
-            <form id='login'>
+            <form id='loginForm'>
               <div>
-                <label htmlFor='email'>邮箱:</label>
-                <input id='email' type='text' placeholder='' />
+                <label>邮箱:</label>
+                <input type='text' placeholder='' />
               </div>
               <div>
-                <label htmlFor='password'>密码:</label>
-                <input id='password' type='password' />
+                <label>密码:</label>
+                <input type='password' />
               </div>
               <div className='options'><a href='' >忘记密码？</a></div>
-              <input id='submit' type='submit' value='登录' />
+              <input id='loginBtn' type='submit' value='登录' />
             </form>
           </div>
         </div>

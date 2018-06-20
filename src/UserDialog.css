@@ -76,13 +76,13 @@
   background-color: #2196F3;
   border: none;
 }
-.form-wrapper form#signup {
+.form-wrapper #signupForm {
   display: none;
 }
-.form-wrapper form#login div.options {
+.form-wrapper #loginForm div.options {
   text-align: right;
 }
-.form-wrapper form#login a {
+.form-wrapper #loginForm a {
   font-size: 12px;
   color: #757575;
 }
