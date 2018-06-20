@@ -5,3 +5,21 @@ let APP_KEY = 'YyPdXBvVa8Vj9k4lwRA7JdcL'
 AV.init({ appId: APP_ID, appKey: APP_KEY })
 
 export default AV
+
+export function signUp(email, password, successFn, errorFn) {
+  let user = new AV.User()
+  user.setUsername(email)
+  user.setEmail(email)
+  user.setPassword(password)
+  user.signUp().then((loginedUser) => {
+    let user = {
+      id: loginedUser.id,
+      email: loginedUser.attributes.email,
+      emailVerified: loginedUser.attributes.emailVerified,
+      username: loginedUser.attributes.username
+    }
+    successFn.call(undefined, user)
+  }, (error) => {
+    errorFn.call(undefined, error)
+  })
+}

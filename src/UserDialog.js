@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { signUp } from './leanCloud'
 import './UserDialog.css'
 import $ from 'jquery'
 
@@ -61,8 +62,18 @@ class UserDialog extends Component {
       $('#loginForm').css({ display: 'flex' })
     }
   }
-  signUp(e) {}
-  logIn(e) {}
+  signUp(e) {
+    e.preventDefault()
+    let { email, password } = this.state.formData,
+      success = (user) => {
+        console.log(user)
+      },
+      error = (error) => {
+        console.log(error)
+      }
+    signUp(email, password, success, error)
+  }
+  logIn(e) { }
   changeFormData(e) {
     let state_copy = JSON.parse(JSON.stringify(this.state)),
       key = e.target.type === 'text' ? 'email' : 'password'
