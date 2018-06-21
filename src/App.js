@@ -12,6 +12,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      user: {},
       newTodo: '',
       todoList: [{ content: 'hi, 我的小宝贝在吗', status: 'undone' }]
     }
@@ -29,7 +30,7 @@ class App extends Component {
 
     return (
       <div className='App'>
-        <UserDialog />
+        <UserDialog onSignUp={this.onSignUp.bind(this)} />
         <div className='todo-wrapper'>
           <header className='todo-header'>
             <h1 className='todo-title'>我的待办</h1>
@@ -54,6 +55,10 @@ class App extends Component {
     this.showScroll()
   }
   /* *******以下为自定义函数******** */
+  onSignUp(user) {
+    this.state.user = user
+    this.setState(this.state)
+  }
   showScroll() {
     let contentHeight = $('.todo-list ul').outerHeight(true),
       scrollTop = undefined

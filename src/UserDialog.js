@@ -18,9 +18,9 @@ class UserDialog extends Component {
       <div className='userDialog-wrapper'>
         <div className='userDialog'>
           <nav>
-            <a onClick={this.switchAction.bind(this)} href='javascript:void(0)'>注　册</a>
+            <a id='signupNav' onClick={this.switchAction.bind(this)} href='javascript:void(0)'>注　册</a>
             <div className='divided'></div>
-            <a onClick={this.switchAction.bind(this)} className='active' href='javascript:void(0)'>登　录</a>
+            <a id='loginNav' onClick={this.switchAction.bind(this)} className='active' href='javascript:void(0)'>登　录</a>
           </nav>
           <div className='form-wrapper'>
             <form id='signupForm' onSubmit={this.signUp.bind(this)}>
@@ -66,6 +66,18 @@ class UserDialog extends Component {
     e.preventDefault()
     let { email, password } = this.state.formData,
       success = (user) => {
+        $('#signupNav').removeClass('active').siblings().addClass('active')
+        $('#signupForm').css({ display: 'none' })
+        $('#loginForm').css({ display: 'flex' })
+        this.props.onSignUp.call(undefined, user)
+      },
+      error = (error) => { console.log(error) }
+    signUp(email, password, success, error)
+  }
+  logIn(e) {
+    e.preventDefault()
+    let { email, password } = this.state.formData,
+      success = (user) => {
         console.log(user)
       },
       error = (error) => {
@@ -73,7 +85,6 @@ class UserDialog extends Component {
       }
     signUp(email, password, success, error)
   }
-  logIn(e) { }
   changeFormData(e) {
     let state_copy = JSON.parse(JSON.stringify(this.state)),
       key = e.target.type === 'text' ? 'email' : 'password'
