@@ -56,8 +56,9 @@ class App extends Component {
   }
   /* *******以下为自定义函数******** */
   onSignUp(user) {
-    this.state.user = user
-    this.setState(this.state)
+    let state_copy = JSON.parse(JSON.stringify(this.state))
+    state_copy.user = user
+    this.setState(state_copy)
   }
   showScroll() {
     let contentHeight = $('.todo-list ul').outerHeight(true),
@@ -74,19 +75,21 @@ class App extends Component {
     }
   }
   addItem() {
-    this.state.todoList.push({
-      content: this.state.newTodo,
+    let state_copy = JSON.parse(JSON.stringify(this.state))
+    state_copy.todoList.push({
+      content: state_copy.newTodo,
       status: 'undone'
     })
     this.setState({
       newTodo: '',
-      todoList: this.state.todoList
+      todoList: state_copy.todoList
     })
   }
   changeNewtodo(value) {
+    let state_copy = JSON.parse(JSON.stringify(this.state))
     this.setState({
       newTodo: value,
-      todoList: this.state.todoList
+      todoList: state_copy.todoList
     })
   }
   changeItemStatus(eventTarget, todoTarget) {
