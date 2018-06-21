@@ -23,3 +23,17 @@ export function signUp(email, password, successFn, errorFn) {
     errorFn.call(undefined, error)
   })
 }
+
+export function logIn(email, password, successFn, errorFn) {
+  AV.User.logIn(email, password).then((loggedInUser) => {
+    let user = {
+      id: loggedInUser.id,
+      email: loggedInUser.attributes.email,
+      emailVerified: loggedInUser.attributes.emailVerified,
+      username: loggedInUser.attributes.username
+    }
+    successFn.call(undefined, user)
+  }, (error) => {
+    errorFn.call(undefined, error)
+  })
+}

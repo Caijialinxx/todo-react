@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { signUp } from './leanCloud'
+import { logIn } from './leanCloud'
 import './UserDialog.css'
 import $ from 'jquery'
 
@@ -78,12 +79,11 @@ class UserDialog extends Component {
     e.preventDefault()
     let { email, password } = this.state.formData,
       success = (user) => {
-        console.log(user)
+        $('.userDialog-wrapper').css({ display: 'none' })
+        this.props.onLogIn.call(undefined, user)
       },
-      error = (error) => {
-        console.log(error)
-      }
-    signUp(email, password, success, error)
+      error = (error) => { console.log(error) }
+    logIn(email, password, success, error)
   }
   changeFormData(e) {
     let state_copy = JSON.parse(JSON.stringify(this.state)),

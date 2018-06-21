@@ -30,7 +30,7 @@ class App extends Component {
 
     return (
       <div className='App'>
-        <UserDialog onSignUp={this.onSignUp.bind(this)} />
+        <UserDialog onSignUp={this.onSignUp.bind(this)} onLogIn={this.onLogIn.bind(this)} />
         <div className='todo-wrapper'>
           <header className='todo-header'>
             <h1 className='todo-title'>我的待办</h1>
@@ -56,6 +56,11 @@ class App extends Component {
   }
   /* *******以下为自定义函数******** */
   onSignUp(user) {
+    let state_copy = JSON.parse(JSON.stringify(this.state))
+    state_copy.user = user
+    this.setState(state_copy)
+  }
+  onLogIn(user) {
     let state_copy = JSON.parse(JSON.stringify(this.state))
     state_copy.user = user
     this.setState(state_copy)
