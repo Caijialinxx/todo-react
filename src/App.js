@@ -31,7 +31,7 @@ class App extends Component {
 
     return (
       <div className='App'>
-        {this.state.user.id ? null : <UserDialog onSignUp={this.onSignUp.bind(this)} onLogIn={this.onLogIn.bind(this)} />}
+        {this.state.user.id ? null : <UserDialog onSignUpOrLogIn={this.onSignUpOrLogIn.bind(this)} />}
         <div className='todo-wrapper'>
           <header className='todo-header'>
             <h1 className='todo-title'>我的待办
@@ -58,12 +58,7 @@ class App extends Component {
     this.showScroll()
   }
   /* *******以下为自定义函数******** */
-  onSignUp(user) {
-    let state_copy = JSON.parse(JSON.stringify(this.state))
-    state_copy.user = user
-    this.setState(state_copy)
-  }
-  onLogIn(user) {
+  onSignUpOrLogIn(user) {
     let state_copy = JSON.parse(JSON.stringify(this.state))
     state_copy.user = user
     this.setState(state_copy)

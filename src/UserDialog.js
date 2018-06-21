@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { signUp } from './leanCloud'
-import { logIn } from './leanCloud'
+import { signUp, logIn } from './leanCloud'
 import './UserDialog.css'
 import $ from 'jquery'
 
@@ -24,7 +23,7 @@ class UserDialog extends Component {
             <a id='loginNav' onClick={this.switchAction.bind(this)} className='active' href='javascript:void(0)'>登　录</a>
           </nav>
           <div className='form-wrapper'>
-            <form id='signupForm' onSubmit={this.signUp.bind(this)}>
+            <form id='signupForm' onSubmit={this.signUpOrLogIn.bind(this)}>
               <div>
                 <label>邮箱:</label>
                 <input type='text' value={this.state.formData.email} onChange={this.changeFormData.bind(this)} placeholder='请设置邮箱作为登录账号' />
@@ -35,7 +34,7 @@ class UserDialog extends Component {
               </div>
               <input id='signupBtn' type='submit' value='注册' />
             </form>
-            <form id='loginForm' onSubmit={this.logIn.bind(this)}>
+            <form id='loginForm' onSubmit={this.signUpOrLogIn.bind(this)}>
               <div>
                 <label>邮箱:</label>
                 <input type='text' value={this.state.formData.email} onChange={this.changeFormData.bind(this)} placeholder='' />
@@ -63,27 +62,21 @@ class UserDialog extends Component {
       $('#loginForm').css({ display: 'flex' })
     }
   }
-  signUp(e) {
+  signUpOrLogIn(e) {
     e.preventDefault()
-    let { email, password } = this.state.formData,
+    let { email, password } = this.state.formData, success = null, error = (error) => { console.log(error) }
+    if (e.target.id === 'signupForm') {
       success = (user) => {
         $('#signupNav').removeClass('active').siblings().addClass('active')
         $('#signupForm').css({ display: 'none' })
         $('#loginForm').css({ display: 'flex' })
-        this.props.onSignUp.call(undefined, user)
-      },
-      error = (error) => { console.log(error) }
-    signUp(email, password, success, error)
-  }
-  logIn(e) {
-    e.preventDefault()
-    let { email, password } = this.state.formData,
-      success = (user) => {
-        $('.userDialog-wrapper').css({ display: 'none' })
-        this.props.onLogIn.call(undefined, user)
-      },
-      error = (error) => { console.log(error) }
-    logIn(email, password, success, error)
+        this.props.onSignUpOrLogIn.call(undefined, user)
+      }
+      signUp(email, password, success, error)
+    } else {
+      success = (user) => { this.props.onSignUpOrLogIn.call(undefined, user) }
+      logIn(email, password, success, error)
+    }
   }
   changeFormData(e) {
     let state_copy = JSON.parse(JSON.stringify(this.state)),
