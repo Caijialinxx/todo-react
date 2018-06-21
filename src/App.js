@@ -8,6 +8,7 @@ import 'normalize.css'
 import './reset.css'
 import UserDialog from './UserDialog'
 import { getCurrentUser, logOut } from './leanCloud'
+import { deepCopyByJSOn } from './deepCopyByJSON'
 
 class App extends Component {
   constructor(props) {
@@ -59,13 +60,13 @@ class App extends Component {
   }
   /* *******以下为自定义函数******** */
   onSignUpOrLogIn(user) {
-    let state_copy = JSON.parse(JSON.stringify(this.state))
+    let state_copy = deepCopyByJSOn(this.state)
     state_copy.user = user
     this.setState(state_copy)
   }
   onLogOut() {
     logOut()
-    let state_copy = JSON.parse(JSON.stringify(this.state))
+    let state_copy = deepCopyByJSOn(this.state)
     state_copy.user = {}
     this.setState(state_copy)
   }
@@ -84,7 +85,7 @@ class App extends Component {
     }
   }
   addItem() {
-    let state_copy = JSON.parse(JSON.stringify(this.state))
+    let state_copy = deepCopyByJSOn(this.state)
     state_copy.todoList.push({
       content: state_copy.newTodo,
       status: 'undone'
@@ -95,7 +96,7 @@ class App extends Component {
     })
   }
   changeNewtodo(value) {
-    let state_copy = JSON.parse(JSON.stringify(this.state))
+    let state_copy = deepCopyByJSOn(this.state)
     this.setState({
       newTodo: value,
       todoList: state_copy.todoList
