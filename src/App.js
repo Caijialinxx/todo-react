@@ -7,12 +7,13 @@ import Scrollbar from './Scrollbar'
 import 'normalize.css'
 import './reset.css'
 import UserDialog from './UserDialog'
+import { getCurrentUser } from './leanCloud'
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: {},
+      user: getCurrentUser() || {},
       newTodo: '',
       todoList: [{ content: 'hi, 我的小宝贝在吗', status: 'undone' }]
     }

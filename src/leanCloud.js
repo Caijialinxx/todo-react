@@ -11,13 +11,8 @@ export function signUp(email, password, successFn, errorFn) {
   user.setUsername(email)
   user.setEmail(email)
   user.setPassword(password)
-  user.signUp().then((loginedUser) => {
-    let user = {
-      id: loginedUser.id,
-      email: loginedUser.attributes.email,
-      emailVerified: loginedUser.attributes.emailVerified,
-      username: loginedUser.attributes.username
-    }
+  user.signUp().then((loggedInUser) => {
+    let user = getUserInfo(loggedInUser)
     successFn.call(undefined, user)
   }, (error) => {
     errorFn.call(undefined, error)
@@ -26,14 +21,28 @@ export function signUp(email, password, successFn, errorFn) {
 
 export function logIn(email, password, successFn, errorFn) {
   AV.User.logIn(email, password).then((loggedInUser) => {
-    let user = {
-      id: loggedInUser.id,
-      email: loggedInUser.attributes.email,
-      emailVerified: loggedInUser.attributes.emailVerified,
-      username: loggedInUser.attributes.username
-    }
+    let user = getUserInfo(loggedInUser)
     successFn.call(undefined, user)
   }, (error) => {
     errorFn.call(undefined, error)
   })
+}
+
+export function getCurrentUser() {
+  let user = AV.User.current()
+  console.log(user)
+  if (user) {
+    return getUserInfo(user)
+  } else {
+    return null
+  }
+}
+
+function getUserInfo(AVUser) {
+  return {
+    id: AVUser.id,
+    email: AVUser.attributes.email,
+    emailVerified: AVUser.attributes.emailVerified,
+    username: AVUser.attributes.username
+  }
 }
