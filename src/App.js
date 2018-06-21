@@ -7,7 +7,7 @@ import Scrollbar from './Scrollbar'
 import 'normalize.css'
 import './reset.css'
 import UserDialog from './UserDialog'
-import { getCurrentUser } from './leanCloud'
+import { getCurrentUser, logOut } from './leanCloud'
 
 class App extends Component {
   constructor(props) {
@@ -31,10 +31,12 @@ class App extends Component {
 
     return (
       <div className='App'>
-        <UserDialog onSignUp={this.onSignUp.bind(this)} onLogIn={this.onLogIn.bind(this)} />
+        {this.state.user.id ? null : <UserDialog onSignUp={this.onSignUp.bind(this)} onLogIn={this.onLogIn.bind(this)} />}
         <div className='todo-wrapper'>
           <header className='todo-header'>
-            <h1 className='todo-title'>我的待办</h1>
+            <h1 className='todo-title'>我的待办
+              {this.state.user.id ? <a onClick={this.onLogOut.bind(this)} href='javascript:void(0)'>退出登录</a> : null}
+            </h1>
           </header>
           <div className='todo-list'>
             <Scrollbar />
@@ -64,6 +66,12 @@ class App extends Component {
   onLogIn(user) {
     let state_copy = JSON.parse(JSON.stringify(this.state))
     state_copy.user = user
+    this.setState(state_copy)
+  }
+  onLogOut() {
+    logOut()
+    let state_copy = JSON.parse(JSON.stringify(this.state))
+    state_copy.user = {}
     this.setState(state_copy)
   }
   showScroll() {

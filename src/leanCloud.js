@@ -38,6 +38,11 @@ export function getCurrentUser() {
   }
 }
 
+export function logOut() {
+  AV.User.logOut()
+  return null
+}
+
 function getUserInfo(AVUser) {
   return {
     id: AVUser.id,
