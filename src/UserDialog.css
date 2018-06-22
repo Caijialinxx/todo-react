@@ -5,7 +5,6 @@
   right: 0;
   bottom: 0;
   z-index: 1;
-  width: 100%;
   background-color: rgba(0,0,0,0.8);
   display: flex;
   justify-content: center;
@@ -14,7 +13,6 @@
 .userDialog {
   padding: 20px 50px;
   width: 380px;
-  height: 300px;
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 0 3px 1px #757575;
@@ -46,44 +44,49 @@
 .userDialog nav a:hover {
   border-bottom: 2px solid #2196F3;
 }
-.userDialog .form-wrapper {
-  height: calc(100% - 65px);
+.form-wrapper #signupForm {
+  display: none;
 }
-.userDialog .form-wrapper form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-}
-.form-wrapper form div {
+
+/* 重置密码框 */
+.reset-wrapper h1 {
+  font-size: 22px;
+  margin-top: 0;
   margin-bottom: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid #dddddd;
 }
-.form-wrapper form label {
+
+/* 公有 */
+form div {
+  margin-bottom: 20px;
+  width: 100%;
+}
+form label {
   display: inline-block;
   letter-spacing: 8px;
   width: 25%;
 }
-.form-wrapper form input {
+form input {
   width: 75%;
   padding: 6px;
   border-radius: 4px;
   outline: none;
   border: 1px solid #dddddd;
 }
-.form-wrapper form input[type='submit'] {
+form input[type='submit'] {
   width: 100%;
   padding: 10px;
   border-radius: 20px;
   background-color: #2196F3;
   border: none;
 }
-.form-wrapper #signupForm {
-  display: none;
-}
-.form-wrapper #loginForm div.options {
+div.options {
   text-align: right;
 }
-.form-wrapper #loginForm a {
-  font-size: 12px;
+div.options a {
+  display: inline-block;
+  font-size: 14px;
   color: #757575;
+  margin-bottom: 20px;
 }
