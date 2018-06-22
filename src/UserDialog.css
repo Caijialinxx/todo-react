@@ -44,9 +44,6 @@
 .userDialog nav a:hover {
   border-bottom: 2px solid #2196F3;
 }
-.form-wrapper #signupForm {
-  display: none;
-}
 
 /* 重置密码框 */
 .reset-wrapper h1 {
@@ -75,6 +72,7 @@ form input {
   border: 1px solid #dddddd;
 }
 form input[type='submit'] {
+  cursor: pointer;
   width: 100%;
   padding: 10px;
   border-radius: 20px;

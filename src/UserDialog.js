@@ -8,6 +8,7 @@ class UserDialog extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      selected: 'login',
       selectedTab: 'defaultSection',
       formData: {
         email: '',
@@ -16,6 +17,37 @@ class UserDialog extends Component {
     }
   }
   render() {
+    let signupForm = (
+      <form id='signupForm' onSubmit={this.signUpOrLogIn.bind(this)}>
+        <div>
+          <label>邮箱:</label>
+          <input type='text' value={this.state.formData.email} onChange={this.changeFormData.bind(this)} placeholder='请设置邮箱作为登录账号' />
+        </div>
+        <div>
+          <label>密码:</label>
+          <input type='password' value={this.state.formData.password} onChange={this.changeFormData.bind(this)} />
+        </div>
+        <div className='options'>
+          <input id='signupBtn' type='submit' value='注册' />
+        </div>
+      </form>
+    )
+    let loginForm = (
+      <form id='loginForm' onSubmit={this.signUpOrLogIn.bind(this)}>
+        <div>
+          <label>邮箱:</label>
+          <input type='text' value={this.state.formData.email} onChange={this.changeFormData.bind(this)} placeholder='' />
+        </div>
+        <div>
+          <label>密码:</label>
+          <input type='password' value={this.state.formData.password} onChange={this.changeFormData.bind(this)} />
+        </div>
+        <div className='options'>
+          <a onClick={this.showResetSection.bind(this)} href='javascript:void(0)'>忘记密码？</a>
+          <input id='loginBtn' type='submit' value='登录' />
+        </div>
+      </form>
+    )
     let defaultSection = (
       <div className='login-wrapper'>
         <nav>
@@ -24,33 +56,7 @@ class UserDialog extends Component {
           <a id='signupNav' onClick={this.switchAction.bind(this)} href='javascript:void(0)'>注　册</a>
         </nav>
         <div className='form-wrapper'>
-          <form id='signupForm' onSubmit={this.signUpOrLogIn.bind(this)}>
-            <div>
-              <label>邮箱:</label>
-              <input type='text' value={this.state.formData.email} onChange={this.changeFormData.bind(this)} placeholder='请设置邮箱作为登录账号' />
-            </div>
-            <div>
-              <label>密码:</label>
-              <input type='password' value={this.state.formData.password} onChange={this.changeFormData.bind(this)} />
-            </div>
-            <div className='options'>
-              <input id='signupBtn' type='submit' value='注册' />
-            </div>
-          </form>
-          <form id='loginForm' onSubmit={this.signUpOrLogIn.bind(this)}>
-            <div>
-              <label>邮箱:</label>
-              <input type='text' value={this.state.formData.email} onChange={this.changeFormData.bind(this)} placeholder='' />
-            </div>
-            <div>
-              <label>密码:</label>
-              <input type='password' value={this.state.formData.password} onChange={this.changeFormData.bind(this)} />
-            </div>
-            <div className='options'>
-              <a onClick={this.showResetSection.bind(this)} href='javascript:void(0)'>忘记密码？</a>
-              <input id='loginBtn' type='submit' value='登录' />
-            </div>
-          </form>
+          {this.state.selected === 'login' ? loginForm : signupForm}
         </div>
       </div>
     )
@@ -89,20 +95,15 @@ class UserDialog extends Component {
         alert('已向您的邮箱发送重置密码邮件，请转至邮箱查收！')
       },
       error = (error) => {
-        console.error(error)
+        alert(error)
       }
     reset(email, success, error)
   }
   switchAction(e) {
-    $(e.target).addClass('active')
-    $(e.target).siblings().removeClass('active')
-    if ($(e.target).html() === '注　册') {
-      $('#signupForm').css({ display: 'block' })
-      $('#loginForm').css({ display: 'none' })
-    } else {
-      $('#signupForm').css({ display: 'none' })
-      $('#loginForm').css({ display: 'block' })
-    }
+    let state_copy = deepCopyByJSOn(this.state)
+    state_copy.selected = state_copy.selected === 'login' ? 'signup' : 'login'
+    $(e.target).addClass('active').siblings().removeClass('active')
+    this.setState(state_copy)
   }
   showDefaultSection() {
     let state_copy = deepCopyByJSOn(this.state)
@@ -111,8 +112,10 @@ class UserDialog extends Component {
   }
   signUpOrLogIn(e) {
     e.preventDefault()
-    let { email, password } = this.state.formData, success = null, error = (error) => { console.log(error) }
-    if (e.target.id === 'signupForm') {
+    let { email, password } = this.state.formData, success = null, error = (error) => { alert(error) }
+    if (email.trim() === '' || password === '') {
+      alert('账号或密码不能为空！')
+    } else if (this.state.selected === 'signup') {
       success = (user) => {
         $('#signupNav').removeClass('active').siblings().addClass('active')
         $('#signupForm').css({ display: 'none' })
