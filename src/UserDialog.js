@@ -101,7 +101,7 @@ class UserDialog extends Component {
   }
   switchAction(e) {
     let state_copy = deepCopyByJSOn(this.state)
-    state_copy.selected = state_copy.selected === 'login' ? 'signup' : 'login'
+    state_copy.selected = $(e.target)[0].id === 'loginNav' ? 'login' : 'signup'
     $(e.target).addClass('active').siblings().removeClass('active')
     this.setState(state_copy)
   }
@@ -112,15 +112,16 @@ class UserDialog extends Component {
   }
   signUpOrLogIn(e) {
     e.preventDefault()
+    let state_copy = deepCopyByJSOn(this.state)
     let { email, password } = this.state.formData, success = null, error = (error) => { alert(error) }
     if (email.trim() === '' || password === '') {
       alert('账号或密码不能为空！')
     } else if (this.state.selected === 'signup') {
-      success = (user) => {
+      success = () => {
+        alert(`已向你的邮箱（${email.trim()}）发送验证邮件，请转至邮箱查收并进行验证！`)
         $('#signupNav').removeClass('active').siblings().addClass('active')
-        $('#signupForm').css({ display: 'none' })
-        $('#loginForm').css({ display: 'block' })
-        this.props.onSignUpOrLogIn.call(undefined, user)
+        state_copy.selected = 'login'
+        this.setState(state_copy)
       }
       signUp(email, password, success, error)
     } else {
