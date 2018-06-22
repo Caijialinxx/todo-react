@@ -4,6 +4,7 @@ import './UserDialog.css'
 import $ from 'jquery'
 import { deepCopyByJSOn } from './deepCopyByJSON';
 import SignUpForm from './SignUpForm';
+import LogInForm from './LogInForm';
 
 class UserDialog extends Component {
   constructor(props) {
@@ -19,22 +20,7 @@ class UserDialog extends Component {
   }
   render() {
     let signupForm = <SignUpForm formData={this.state.formData} onSubmit={this.signUpOrLogIn.bind(this)} onChange={this.changeFormData.bind(this)} />
-    let loginForm = (
-      <form id='loginForm' onSubmit={this.signUpOrLogIn.bind(this)}>
-        <div>
-          <label>邮箱:</label>
-          <input type='text' value={this.state.formData.email} onChange={this.changeFormData.bind(this)} placeholder='' />
-        </div>
-        <div>
-          <label>密码:</label>
-          <input type='password' value={this.state.formData.password} onChange={this.changeFormData.bind(this)} />
-        </div>
-        <div className='options'>
-          <a onClick={this.showResetSection.bind(this)} href='javascript:void(0)'>忘记密码？</a>
-          <input id='loginBtn' type='submit' value='登录' />
-        </div>
-      </form>
-    )
+    let loginForm = <LogInForm formData={this.state.formData} onSubmit={this.signUpOrLogIn.bind(this)} onChange={this.changeFormData.bind(this)} onForget={this.showResetSection.bind(this)} />
     let defaultSection = (
       <div className='login-wrapper'>
         <nav>
