@@ -46,7 +46,7 @@
 }
 
 /* 重置密码框 */
-.reset-wrapper h1 {
+form#resetForm h1 {
   font-size: 22px;
   margin-top: 0;
   margin-bottom: 20px;

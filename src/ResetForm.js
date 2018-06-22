@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class SignUpForm extends Component {
+export default class ResetForm extends Component {
   render() {
     return (
       <form id='resetForm' onSubmit={this.props.onSubmit.bind(this)}>

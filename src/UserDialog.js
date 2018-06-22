@@ -12,7 +12,7 @@ class UserDialog extends Component {
     super(props)
     this.state = {
       selected: 'login',
-      selectedTab: 'defaultSection',
+      selectedTab: 'signUpOrLogIn',
       formData: {
         email: '',
         password: ''
@@ -22,7 +22,7 @@ class UserDialog extends Component {
   render() {
     let signupForm = <SignUpForm formData={this.state.formData} onSubmit={this.signUpOrLogIn.bind(this)} onChange={this.changeFormData.bind(this)} />
     let loginForm = <LogInForm formData={this.state.formData} onSubmit={this.signUpOrLogIn.bind(this)} onChange={this.changeFormData.bind(this)} onForget={this.showResetSection.bind(this)} />
-    let defaultSection = (
+    let signUpOrLogIn = (
       <div className='login-wrapper'>
         <nav>
           <a id='loginNav' onClick={this.switchAction.bind(this)} className='active' href='javascript:void(0)'>登　录</a>
@@ -38,7 +38,7 @@ class UserDialog extends Component {
     return (
       <div className='userDialog-wrapper'>
         <div className='userDialog'>
-          {this.state.selectedTab === 'defaultSection' ? defaultSection : resetSection}
+          {this.state.selectedTab === 'signUpOrLogIn' ? signUpOrLogIn : resetSection}
         </div>
       </div>
     )
@@ -67,7 +67,7 @@ class UserDialog extends Component {
   }
   showDefaultSection() {
     let state_copy = deepCopyByJSOn(this.state)
-    state_copy.selectedTab = 'defaultSection'
+    state_copy.selectedTab = 'signUpOrLogIn'
     this.setState(state_copy)
   }
   signUpOrLogIn(e) {
