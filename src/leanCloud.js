@@ -27,7 +27,7 @@ export function signUp(email, password, successFn, errorFn) {
         errorFn.call(undefined, `错误代码：${error.code}\n错误消息：密码无效，不允许空白密码！请重设！`)
         return;
       default:
-        errorFn.call(undefined, `错误代码：${error.code}\n错误消息：${error}`)
+        errorFn.call(undefined, `错误代码：${error.code}\n错误消息：${error.message}`)
         return;
     }
   })
@@ -56,7 +56,7 @@ export function logIn(email, password, successFn, errorFn) {
         errorFn.call(undefined, `错误代码：${error.code}\n错误消息：登录失败次数超过限制，请稍候再试！或者通过忘记密码重设密码。`)
         return;
       default:
-        errorFn.call(undefined, `错误代码：${error.code}\n错误消息：${error}`)
+        errorFn.call(undefined, `错误代码：${error.code}\n错误消息：${error.message}`)
         return;
     }
   })
@@ -77,7 +77,7 @@ export function reset(email, successFn, errorFn) {
         errorFn.call(undefined, `错误代码：${error.code}\n查询不到该电子邮箱，请检查电子邮箱是否输入正确或重新注册！`)
         return;
       default:
-        errorFn.call(undefined, `错误代码：${error.code}\n错误消息：${error}`)
+        errorFn.call(undefined, `错误代码：${error.code}\n错误消息：${error.message}`)
         return;
     }
   })
@@ -85,7 +85,11 @@ export function reset(email, successFn, errorFn) {
 
 export function getCurrentUser() {
   let user = AV.User.current()
-  if (user.emailVerified) { return getUserInfo(user) }
+  if (user) {
+    if (user.attributes.emailVerified) {
+      return getUserInfo(user)
+    }
+  }
   else { return null }
 }
 
@@ -110,7 +114,7 @@ function verify(email) {
         alert(`错误代码：${error.code}\n请求被终止，请检查网络是否正确连接！`)
         return;
       default:
-        alert(`错误代码：${error.code}\n错误消息：${error}`)
+        alert(`错误代码：${error.code}\n错误消息：${error.message}`)
         return;
     }
   })
