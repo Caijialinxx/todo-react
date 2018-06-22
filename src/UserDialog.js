@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { signUp, logIn } from './leanCloud'
+import { signUp, logIn, reset } from './leanCloud'
 import './UserDialog.css'
 import $ from 'jquery'
 import { deepCopyByJSOn } from './deepCopyByJSON';
@@ -82,7 +82,17 @@ class UserDialog extends Component {
     state_copy.selectedTab = 'resetSection'
     this.setState(state_copy)
   }
-  resetPassword() { }
+  resetPassword(e) {
+    e.preventDefault()
+    let email = this.state.formData.email,
+      success = () => {
+        alert('已向您的邮箱发送重置密码邮件，请转至邮箱查收！')
+      },
+      error = (error) => {
+        console.error(error)
+      }
+    reset(email, success, error)
+  }
   switchAction(e) {
     $(e.target).addClass('active')
     $(e.target).siblings().removeClass('active')

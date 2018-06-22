@@ -59,6 +59,32 @@ export function logIn(email, password, successFn, errorFn) {
   })
 }
 
+export function reset(email, successFn, errorFn){
+  AV.User.requestPasswordReset(email).then(()=>{
+    successFn.call(undefined)
+  }, (error)=>{
+    console.log(error.code)
+    switch (error.code) {
+      case 204:
+        alert('请提供注册时的电子邮箱！')
+        break;
+      case 205:
+        alert('查询不到该电子邮箱，请检查电子邮箱或者重新注册！')
+        break;
+      case 216:
+        alert('电子邮箱未通过验证！请先验证再登录。')
+        break;
+      case 219:
+        alert('登录失败次数超过限制，请稍候再试！或者通过忘记密码重设密码。')
+        break;
+      default:
+        alert(error)
+        break;
+    }
+    errorFn.call(undefined, error)
+  })
+}
+
 export function getCurrentUser() {
   let user = AV.User.current()
   console.log(user)
