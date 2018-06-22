@@ -1,17 +1,14 @@
 import React, { Component } from 'react'
 import { signUp, logIn, reset } from './leanCloud'
 import './UserDialog.css'
-import $ from 'jquery'
 import { deepCopyByJSOn } from './deepCopyByJSON';
-import SignUpForm from './SignUpForm';
-import LogInForm from './LogInForm';
 import ResetForm from './ResetForm';
+import SignUpOrLogIn from './SignUpOrLogIn';
 
 class UserDialog extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selected: 'login',
       selectedTab: 'signUpOrLogIn',
       formData: {
         email: '',
@@ -20,20 +17,7 @@ class UserDialog extends Component {
     }
   }
   render() {
-    let signupForm = <SignUpForm formData={this.state.formData} onSubmit={this.signUpOrLogIn.bind(this)} onChange={this.changeFormData.bind(this)} />
-    let loginForm = <LogInForm formData={this.state.formData} onSubmit={this.signUpOrLogIn.bind(this)} onChange={this.changeFormData.bind(this)} onForget={this.showResetSection.bind(this)} />
-    let signUpOrLogIn = (
-      <div className='login-wrapper'>
-        <nav>
-          <a id='loginNav' onClick={this.switchAction.bind(this)} className='active' href='javascript:void(0)'>登　录</a>
-          <div className='divided'></div>
-          <a id='signupNav' onClick={this.switchAction.bind(this)} href='javascript:void(0)'>注　册</a>
-        </nav>
-        <div className='form-wrapper'>
-          {this.state.selected === 'login' ? loginForm : signupForm}
-        </div>
-      </div>
-    )
+    let signUpOrLogIn = <SignUpOrLogIn formData={this.state.formData} onSignUp={this.signUp.bind(this)} onLogIn={this.logIn.bind(this)} onChange={this.changeFormData.bind(this)} onForget={this.showResetSection.bind(this)} />
     let resetSection = <ResetForm formData={this.state.formData} onSubmit={this.resetPassword.bind(this)} onChange={this.changeFormData.bind(this)} onShow={this.showDefaultSection.bind(this)} />
     return (
       <div className='userDialog-wrapper'>
@@ -59,33 +43,33 @@ class UserDialog extends Component {
       }
     reset(email, success, error)
   }
-  switchAction(e) {
-    let state_copy = deepCopyByJSOn(this.state)
-    state_copy.selected = $(e.target)[0].id === 'loginNav' ? 'login' : 'signup'
-    $(e.target).addClass('active').siblings().removeClass('active')
-    this.setState(state_copy)
-  }
   showDefaultSection() {
     let state_copy = deepCopyByJSOn(this.state)
     state_copy.selectedTab = 'signUpOrLogIn'
     this.setState(state_copy)
   }
-  signUpOrLogIn(e) {
+  signUp(e) {
     e.preventDefault()
-    let state_copy = deepCopyByJSOn(this.state)
-    let { email, password } = this.state.formData, success = null, error = (error) => { alert(error) }
-    if (email.trim() === '' || password === '') {
-      alert('账号或密码不能为空！')
-    } else if (this.state.selected === 'signup') {
+    let { email, password } = this.state.formData,
       success = () => {
         alert(`已向你的邮箱（${email.trim()}）发送验证邮件，请转至邮箱查收并进行验证！`)
-        $('#signupNav').removeClass('active').siblings().addClass('active')
-        state_copy.selected = 'login'
-        this.setState(state_copy)
-      }
-      signUp(email, password, success, error)
+        window.location.reload()
+      },
+      error = (error) => { alert(error) }
+    if (email.trim() === '' || password === '') {
+      alert('账号或密码不能为空！')
     } else {
-      success = (user) => { this.props.onSignUpOrLogIn.call(undefined, user) }
+      signUp(email, password, success, error)
+    }
+  }
+  logIn(e) {
+    e.preventDefault()
+    let { email, password } = this.state.formData,
+      success = (user) => { this.props.onSignUpOrLogIn.call(undefined, user) },
+      error = (error) => { alert(error) }
+    if (email.trim() === '' || password === '') {
+      alert('账号或密码不能为空！')
+    } else {
       logIn(email, password, success, error)
     }
   }
