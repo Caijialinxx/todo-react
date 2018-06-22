@@ -3,6 +3,7 @@ import { signUp, logIn, reset } from './leanCloud'
 import './UserDialog.css'
 import $ from 'jquery'
 import { deepCopyByJSOn } from './deepCopyByJSON';
+import SignUpForm from './SignUpForm';
 
 class UserDialog extends Component {
   constructor(props) {
@@ -17,21 +18,7 @@ class UserDialog extends Component {
     }
   }
   render() {
-    let signupForm = (
-      <form id='signupForm' onSubmit={this.signUpOrLogIn.bind(this)}>
-        <div>
-          <label>邮箱:</label>
-          <input type='text' value={this.state.formData.email} onChange={this.changeFormData.bind(this)} placeholder='请设置邮箱作为登录账号' />
-        </div>
-        <div>
-          <label>密码:</label>
-          <input type='password' value={this.state.formData.password} onChange={this.changeFormData.bind(this)} />
-        </div>
-        <div className='options'>
-          <input id='signupBtn' type='submit' value='注册' />
-        </div>
-      </form>
-    )
+    let signupForm = <SignUpForm formData={this.state.formData} onSubmit={this.signUpOrLogIn.bind(this)} onChange={this.changeFormData.bind(this)} />
     let loginForm = (
       <form id='loginForm' onSubmit={this.signUpOrLogIn.bind(this)}>
         <div>
