@@ -5,6 +5,7 @@ import $ from 'jquery'
 import { deepCopyByJSOn } from './deepCopyByJSON';
 import SignUpForm from './SignUpForm';
 import LogInForm from './LogInForm';
+import ResetForm from './ResetForm';
 
 class UserDialog extends Component {
   constructor(props) {
@@ -33,21 +34,7 @@ class UserDialog extends Component {
         </div>
       </div>
     )
-    let resetSection = (
-      <div className='reset-wrapper'>
-        <h1>重置密码</h1>
-        <form id='resetForm' onSubmit={this.resetPassword.bind(this)}>
-          <div>
-            <label>邮箱:</label>
-            <input type='text' value={this.state.formData.email} onChange={this.changeFormData.bind(this)} placeholder='注册的邮箱（即登录账号）' />
-          </div>
-          <div className='options'>
-            <a onClick={this.showDefaultSection.bind(this)} href='javascript:void(0)'>返回登录</a>
-            <input id='sendEmailBtn' type='submit' value='发送重置密码邮件' />
-          </div>
-        </form>
-      </div>
-    )
+    let resetSection = <ResetForm formData={this.state.formData} onSubmit={this.resetPassword.bind(this)} onChange={this.changeFormData.bind(this)} onShow={this.showDefaultSection.bind(this)} />
     return (
       <div className='userDialog-wrapper'>
         <div className='userDialog'>
