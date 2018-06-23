@@ -4,6 +4,20 @@ let APP_ID = '4Sd2Vkpni8g9EB3wVuTzFAvt-gzGzoHsz'
 let APP_KEY = 'YyPdXBvVa8Vj9k4lwRA7JdcL'
 AV.init({ appId: APP_ID, appKey: APP_KEY })
 
+export const TodoModel = {
+  create(item, successFn, errorFn) {
+    let Todo = AV.Object.extend('Todo')
+    let todo = new Todo()
+    todo.set('content', item.content)
+    todo.set('status', item.status)
+    todo.save().then(function (todo) {
+      successFn.call(undefined, todo.id)
+    }, function (error) {
+      errorFn.call(undefined, error)
+    })
+  },
+}
+
 export function signUp(email, password, successFn, errorFn) {
   let user = new AV.User()
   user.setUsername(email)

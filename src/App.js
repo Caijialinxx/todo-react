@@ -7,7 +7,7 @@ import Scrollbar from './Scrollbar'
 import 'normalize.css'
 import './reset.css'
 import UserDialog from './UserDialog'
-import { getCurrentUser, logOut } from './leanCloud'
+import { getCurrentUser, logOut, TodoModel } from './leanCloud'
 import { deepCopyByJSOn } from './deepCopyByJSON'
 
 class App extends Component {
@@ -86,13 +86,19 @@ class App extends Component {
   }
   addItem() {
     let state_copy = deepCopyByJSOn(this.state)
-    state_copy.todoList.push({
+    let newItem = {
       content: state_copy.newTodo,
-      status: 'undone'
-    })
-    this.setState({
-      newTodo: '',
-      todoList: state_copy.todoList
+      status: 'undone',
+    }
+    TodoModel.create(newItem, (id) => {
+      newItem.id = id
+      state_copy.todoList.push(newItem)
+      this.setState({
+        newTodo: '',
+        todoList: state_copy.todoList
+      })
+    }, (error) => {
+      console.error(error)
     })
   }
   changeNewtodo(value) {
