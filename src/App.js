@@ -130,8 +130,12 @@ class App extends Component {
     this.setState(this.state)
   }
   deleteItem(todoTarget) {
-    todoTarget.status = 'delete'
-    this.setState(this.state)
+    console.log(todoTarget)
+    TodoModel.destroy(todoTarget.id, ()=>{
+      todoTarget.status = 'delete'
+      this.setState(todoTarget)
+    })
+    console.log(this.state)
   }
   moveAction(eventTarget, action) {
     let currentElem = $(eventTarget).parents('li'),

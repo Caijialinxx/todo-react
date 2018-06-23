@@ -45,7 +45,15 @@ export const TodoModel = {
     }, function (error) {
       // 异常处理
     });
-  }
+  },
+  destroy(id, successFn) {
+    let todo = AV.Object.createWithoutData('Todo', id);
+    todo.destroy().then((success) => {
+      successFn.call(undefined)
+    }, function (error) {
+      // 删除失败
+    });
+  },
 }
 
 export function signUp(email, password, successFn, errorFn) {
