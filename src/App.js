@@ -16,8 +16,13 @@ class App extends Component {
     this.state = {
       user: getCurrentUser() || {},
       newTodo: '',
-      todoList: [{ content: 'hi, 我的小宝贝在吗', status: 'undone' }]
+      todoList: []
     }
+    TodoModel.fetch((items) => {
+      let state_copy = deepCopyByJSOn(this.state)
+      state_copy.todoList = items
+      this.setState(state_copy)
+    }, (error) => { console.error(error) })
   }
   render() {
     let todos = this.state.todoList

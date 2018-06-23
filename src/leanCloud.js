@@ -16,6 +16,25 @@ export const TodoModel = {
       errorFn.call(undefined, error)
     })
   },
+  fetch(successFn, errorFn) {
+    let query = new AV.Query('Todo');
+    query.find().then(function (todos) {
+      let items = todos.map((todo) => {
+        return {
+          id: todo.id,
+          content: todo.attributes.content,
+          status: todo.attributes.status
+        }
+      })
+      successFn.call(undefined, items)
+    }, (error) => {
+      errorFn.call(undefined, error)
+    }).then(function (todos) {
+      // 更新成功
+    }, function (error) {
+      // 异常处理
+    });
+  }
 }
 
 export function signUp(email, password, successFn, errorFn) {
