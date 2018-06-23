@@ -18,11 +18,13 @@ class App extends Component {
       newTodo: '',
       todoList: []
     }
-    TodoModel.fetch((items) => {
-      let state_copy = deepCopyByJSOn(this.state)
-      state_copy.todoList = items
-      this.setState(state_copy)
-    }, (error) => { console.error(error) })
+    if (this.state.user.id) {
+      TodoModel.fetch((items) => {
+        let state_copy = deepCopyByJSOn(this.state)
+        state_copy.todoList = items
+        this.setState(state_copy)
+      }, (error) => { console.error(error) })
+    }
   }
   render() {
     let todos = this.state.todoList
@@ -68,12 +70,14 @@ class App extends Component {
     let state_copy = deepCopyByJSOn(this.state)
     state_copy.user = user
     this.setState(state_copy)
+    window.location.reload()
   }
   onLogOut() {
     logOut()
     let state_copy = deepCopyByJSOn(this.state)
     state_copy.user = {}
     this.setState(state_copy)
+    window.location.reload()
   }
   showScroll() {
     let contentHeight = $('.todo-list ul').outerHeight(true),
