@@ -1,10 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './Scrollbar.css'
 
-class Scrollbar extends Component {
-  render() {
-    return <div className='scrollWrapper'><div className='scrollBar'></div></div>
-  }
+export default function () {
+  return <div className='scrollWrapper'><div className='scrollBar'></div></div>
 }
-
-export default Scrollbar
