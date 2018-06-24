@@ -5,6 +5,20 @@ let APP_KEY = 'YyPdXBvVa8Vj9k4lwRA7JdcL'
 AV.init({ appId: APP_ID, appKey: APP_KEY })
 
 export const TodoModel = {
+  fetch(successFn, errorFn) {
+    let query = new AV.Query('Todo');
+    query.addAscending('order').find().then((todos) => {
+      let items = todos.map((todo) => {
+        return {
+          id: todo.id,
+          order: todo.order,
+          content: todo.attributes.content,
+          status: todo.attributes.status
+        }
+      })
+      successFn.call(undefined, items)
+    }, (error) => { errorFn.call(undefined, `错误代码：${error.code}\n错误消息：请求被终止，请检查网络是否正确连接！`) })
+  },
   create(item, successFn, errorFn) {
     if (AV.User.current()) {
       let Todo = AV.Object.extend('Todo')
@@ -27,20 +41,6 @@ export const TodoModel = {
     } else {
       errorFn.call(undefined, '当前未登录！无法使用！')
     }
-  },
-  fetch(successFn, errorFn) {
-    let query = new AV.Query('Todo');
-    query.addAscending('order').find().then((todos) => {
-      let items = todos.map((todo) => {
-        return {
-          id: todo.id,
-          order: todo.order,
-          content: todo.attributes.content,
-          status: todo.attributes.status
-        }
-      })
-      successFn.call(undefined, items)
-    }, (error) => { errorFn.call(undefined, error) })
   },
   destroy(id, successFn, errorFn) {
     let todo = AV.Object.createWithoutData('Todo', id);

@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import $ from 'jquery'
-import './App.css'
+import { getCurrentUser, logOut, TodoModel } from './leanCloud'
+import { deepCopyByJSOn } from './deepCopyByJSON'
 import TodoInput from './TodoInput'
 import TodoItem from './TodoItem'
 import Scrollbar from './Scrollbar'
+import UserDialog from './UserDialog'
+import Clock from './Clock'
+import './App.css'
 import 'normalize.css'
 import './reset.css'
-import UserDialog from './UserDialog'
-import { getCurrentUser, logOut, TodoModel } from './leanCloud'
-import { deepCopyByJSOn } from './deepCopyByJSON'
-import Clock from './Clock'
 
 class App extends Component {
   constructor(props) {
@@ -52,8 +52,7 @@ class App extends Component {
             <Scrollbar />
             <ul>{todos}</ul>
           </div>
-          <TodoInput id='add'
-            content={this.state.newTodo}
+          <TodoInput id='add' content={this.state.newTodo}
             onSubmit={this.addItem.bind(this)}
             onChange={this.changeNewtodo.bind(this)}
           />
@@ -115,10 +114,8 @@ class App extends Component {
   }
   changeNewtodo(value) {
     let state_copy = deepCopyByJSOn(this.state)
-    this.setState({
-      newTodo: value,
-      todoList: state_copy.todoList
-    })
+    state_copy.newTodo = value
+    this.setState(state_copy)
   }
   changeItemStatus(eventTarget, todoTarget) {
     if (todoTarget.todo.status === 'undone') {
