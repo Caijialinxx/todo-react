@@ -9,6 +9,7 @@ export const TodoModel = {
     if (AV.User.current()) {
       let Todo = AV.Object.extend('Todo')
       let todo = new Todo()
+      todo.set('order', item.order)
       todo.set('content', item.content)
       todo.set('status', item.status)
 
@@ -29,10 +30,11 @@ export const TodoModel = {
   },
   fetch(successFn, errorFn) {
     let query = new AV.Query('Todo');
-    query.find().then((todos) => {
+    query.addAscending('order').find().then((todos) => {
       let items = todos.map((todo) => {
         return {
           id: todo.id,
+          order: todo.order,
           content: todo.attributes.content,
           status: todo.attributes.status
         }
@@ -44,11 +46,15 @@ export const TodoModel = {
     let todo = AV.Object.createWithoutData('Todo', id);
     todo.destroy().then(() => { successFn.call(undefined) }, (error) => { errorFn.call(undefined, error) });
   },
-  update(target, successFn, errorFn) {
-    let todo = AV.Object.createWithoutData('Todo', target.id)
-    target.status = target.status === 'undone' ? 'done' : 'undone'
-    todo.set('status', target.status);
-    todo.save().then(() => { successFn.call(undefined, target) }, (error) => { errorFn.call(error) })
+  update(type, item, successFn, errorFn) {
+    let todo = AV.Object.createWithoutData('Todo', item.id)
+    if (type === 'status') {
+      item.status = item.status === 'undone' ? 'done' : 'undone'
+      todo.set('status', item.status);
+    } else {
+      todo.set('order', item.order);
+    }
+    todo.save().then(() => { successFn.call(undefined, item) }, (error) => { errorFn.call(error) })
   }
 }
 

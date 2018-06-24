@@ -23,7 +23,7 @@ class App extends Component {
         let state_copy = deepCopyByJSOn(this.state)
         state_copy.todoList = items
         this.setState(state_copy)
-      }, (error) => { console.error(error) })
+      }, (error) => { alert(error) })
     }
   }
   render() {
@@ -96,6 +96,7 @@ class App extends Component {
   addItem() {
     let state_copy = deepCopyByJSOn(this.state)
     let newItem = {
+      order: $('ul')[0].children.length,
       content: state_copy.newTodo,
       status: 'undone',
     }
@@ -119,7 +120,7 @@ class App extends Component {
   }
   changeItemStatus(eventTarget, todoTarget) {
     if (todoTarget.todo.status === 'undone') {
-      TodoModel.update(todoTarget.todo, (updatedTodo) => {
+      TodoModel.update('status', todoTarget.todo, (updatedTodo) => {
         $(eventTarget.children[0])[0].src = todoTarget.done
         $(eventTarget.children[1]).addClass('done')
         this.setState(updatedTodo)
@@ -127,7 +128,7 @@ class App extends Component {
         console.error(error)
       })
     } else {
-      TodoModel.update(todoTarget.todo, (updatedTodo) => {
+      TodoModel.update('status', todoTarget.todo, (updatedTodo) => {
         $(eventTarget.children[0])[0].src = todoTarget.undone
         $(eventTarget.children[1]).removeClass('done')
         this.setState(updatedTodo)
@@ -144,37 +145,57 @@ class App extends Component {
     }, (error) => { console.error(error) })
   }
   moveAction(eventTarget, action) {
-    let currentElem = $(eventTarget).parents('li'),
-      allLi = $('li'),
-      index = $(currentElem).index(),
-      lastIndex = $(currentElem).parent().children().length - 1
+    let index = $(eventTarget).parents('li').index(),
+      lastIndex = $(eventTarget).parents('ul').children().length - 1
+    let state_copy = deepCopyByJSOn(this.state),
+      todoList = state_copy.todoList
 
     if (action === 'toTop') {
       if (index === 0) {
         alert('已经是第一个啦！')
       } else {
-        $(allLi).eq(0).before($(currentElem))
+        swap(todoList, index, 0)
       }
     } else if (action === 'moveUp') {
       if (index === 0) {
         alert('已经是第一个啦！')
       } else {
-        $(allLi).eq(index - 1).before($(currentElem))
+        swap(todoList, index, index - 1)
       }
     } else if (action === 'moveDown') {
       if (index === lastIndex) {
         alert('已经是最后一个啦！')
       } else {
-        $(allLi).eq(index + 1).after($(currentElem))
+        swap(todoList, index, index + 1)
       }
     } else if (action === 'toBottom') {
       if (index === lastIndex) {
         alert('已经是最后一个啦！')
       } else {
-        $(allLi).eq(lastIndex).after($(currentElem))
+        swap(todoList, index, lastIndex)
       }
     }
+    todoList.filter((item) => item.status !== 'delete')
+      .map((item, index) => {
+        item.order = index
+        TodoModel.update('order', item,
+          () => { this.setState(state_copy) },
+          (error) => { console.error(error) })
+      })
   }
 }
 
 export default App
+
+function swap(arr, currentIndex, targetIndex) {
+  if (Math.abs(targetIndex - currentIndex) === 1) {
+    arr[targetIndex] = arr.splice(currentIndex, 1, arr[targetIndex])[0]
+  } else if (targetIndex - currentIndex > 1) {
+    var deleted = arr.splice(currentIndex, 1)[0]
+    arr.push(deleted)
+  } else if (targetIndex - currentIndex < -1) {
+    var deleted = arr.splice(currentIndex, 1)[0]
+    arr.unshift(deleted)
+  }
+  return arr
+}
