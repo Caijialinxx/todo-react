@@ -1,4 +1,5 @@
 import React from "react"
+import './Clock.css'
 
 class Time extends React.Component {
   // Mounting State
@@ -12,7 +13,7 @@ class Time extends React.Component {
     // We should not call this.setState() here.
   }
   render() {
-    return <p className={this.props.className}>It is {this.state.date.toTimeString().substr(0, 8)} now.</p>
+    return <p className='time'>{this.state.date.toTimeString().substr(0, 8)}</p>
   }
   componentDidMount() {
     // We can call this.setState() if needed.

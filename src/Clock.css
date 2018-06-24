@@ -1,0 +1,10 @@
+@font-face {
+  font-family: "myfont";
+  src: url(./Kabob.ttf) format("truetype");
+}
+.todo-header .time {
+  color: white;
+  font-family: 'myfont';
+  font-size: 20px;
+  float: right;
+}

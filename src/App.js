@@ -9,6 +9,7 @@ import './reset.css'
 import UserDialog from './UserDialog'
 import { getCurrentUser, logOut, TodoModel } from './leanCloud'
 import { deepCopyByJSOn } from './deepCopyByJSON'
+import Clock from './Clock'
 
 class App extends Component {
   constructor(props) {
@@ -42,6 +43,7 @@ class App extends Component {
         {this.state.user.id ? null : <UserDialog onSignUpOrLogIn={this.onSignUpOrLogIn.bind(this)} />}
         <div className='todo-wrapper'>
           <header className='todo-header'>
+            <Clock />
             <h1 className='todo-title'>我的待办
               {this.state.user.id ? <a onClick={this.onLogOut.bind(this)} href='javascript:void(0)'>退出登录</a> : null}
             </h1>
@@ -50,7 +52,7 @@ class App extends Component {
             <Scrollbar />
             <ul>{todos}</ul>
           </div>
-          <TodoInput className='todo-inputWrapper' id='add'
+          <TodoInput id='add'
             content={this.state.newTodo}
             onSubmit={this.addItem.bind(this)}
             onChange={this.changeNewtodo.bind(this)}
