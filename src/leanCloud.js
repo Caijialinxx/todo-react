@@ -29,7 +29,7 @@ export const TodoModel = {
   },
   fetch(successFn, errorFn) {
     let query = new AV.Query('Todo');
-    query.find().then(function (todos) {
+    query.find().then((todos) => {
       let items = todos.map((todo) => {
         return {
           id: todo.id,
@@ -38,29 +38,17 @@ export const TodoModel = {
         }
       })
       successFn.call(undefined, items)
-    }, (error) => {
-      errorFn.call(undefined, error)
-    }).then(function (todos) {
-      // 更新成功
-    }, function (error) {
-      // 异常处理
-    });
+    }, (error) => { errorFn.call(undefined, error) })
   },
-  destroy(id, successFn) {
+  destroy(id, successFn, errorFn) {
     let todo = AV.Object.createWithoutData('Todo', id);
-    todo.destroy().then((success) => {
-      successFn.call(undefined)
-    }, function (error) {
-      // 删除失败
-    });
+    todo.destroy().then(() => { successFn.call(undefined) }, (error) => { errorFn.call(undefined, error) });
   },
   update(target, successFn, errorFn) {
     let todo = AV.Object.createWithoutData('Todo', target.id)
     target.status = target.status === 'undone' ? 'done' : 'undone'
     todo.set('status', target.status);
-    todo.save().then(() => { successFn.call(undefined, target) },
-      (error) => { errorFn.call(error) }
-    )
+    todo.save().then(() => { successFn.call(undefined, target) }, (error) => { errorFn.call(error) })
   }
 }
 

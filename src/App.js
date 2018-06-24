@@ -138,12 +138,10 @@ class App extends Component {
 
   }
   deleteItem(todoTarget) {
-    console.log(todoTarget)
     TodoModel.destroy(todoTarget.id, () => {
       todoTarget.status = 'delete'
       this.setState(todoTarget)
-    })
-    console.log(this.state)
+    }, (error) => { console.error(error) })
   }
   moveAction(eventTarget, action) {
     let currentElem = $(eventTarget).parents('li'),
