@@ -119,19 +119,27 @@ class App extends Component {
   }
   changeItemStatus(eventTarget, todoTarget) {
     if (todoTarget.todo.status === 'undone') {
-      todoTarget.todo.status = 'done'
-      $(eventTarget.children[0])[0].src = todoTarget.done
-      $(eventTarget.children[1]).addClass('done')
+      TodoModel.update(todoTarget.todo, (updatedTodo) => {
+        $(eventTarget.children[0])[0].src = todoTarget.done
+        $(eventTarget.children[1]).addClass('done')
+        this.setState(updatedTodo)
+      }, (error) => {
+        console.error(error)
+      })
     } else {
-      todoTarget.todo.status = 'undone'
-      $(eventTarget.children[0])[0].src = todoTarget.undone
-      $(eventTarget.children[1]).removeClass('done')
+      TodoModel.update(todoTarget.todo, (updatedTodo) => {
+        $(eventTarget.children[0])[0].src = todoTarget.undone
+        $(eventTarget.children[1]).removeClass('done')
+        this.setState(updatedTodo)
+      }, (error) => {
+        console.error(error)
+      })
     }
-    this.setState(this.state)
+
   }
   deleteItem(todoTarget) {
     console.log(todoTarget)
-    TodoModel.destroy(todoTarget.id, ()=>{
+    TodoModel.destroy(todoTarget.id, () => {
       todoTarget.status = 'delete'
       this.setState(todoTarget)
     })

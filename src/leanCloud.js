@@ -54,6 +54,14 @@ export const TodoModel = {
       // 删除失败
     });
   },
+  update(target, successFn, errorFn) {
+    let todo = AV.Object.createWithoutData('Todo', target.id)
+    target.status = target.status === 'undone' ? 'done' : 'undone'
+    todo.set('status', target.status);
+    todo.save().then(() => { successFn.call(undefined, target) },
+      (error) => { errorFn.call(error) }
+    )
+  }
 }
 
 export function signUp(email, password, successFn, errorFn) {
