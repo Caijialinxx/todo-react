@@ -40,6 +40,7 @@ class App extends Component {
 
     return (
       <div className='App'>
+        <div className='background'></div>
         {this.state.user.id ? null : <UserDialog onSignUpOrLogIn={this.onSignUpOrLogIn.bind(this)} />}
         <div className='todo-wrapper'>
           <header className='todo-header'>

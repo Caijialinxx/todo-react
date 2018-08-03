@@ -1,12 +1,31 @@
+.App {
+  height: 100vh;
+  width: 100vw;
+  background-color: #eee;
+}
+
+.background {
+  height: 78%;
+  background: url(./images/workhard.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
 .todo-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 60%;
+  height: 80%;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  max-width: 540px;
+  max-width: 900px;
   min-width: 360px;
   overflow: hidden;
   box-shadow: 0 0 3px 1px #BDBDBD;
-  position: relative;
 }
 
 .todo-header {
@@ -28,6 +47,7 @@
 }
 
 .todo-list {
+  flex-grow: 1;
   color: #757575;
   font-size: 28px;
   font-weight: bold;
