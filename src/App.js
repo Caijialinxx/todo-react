@@ -7,6 +7,7 @@ import TodoItem from './TodoItem'
 import Scrollbar from './Scrollbar'
 import UserDialog from './UserDialog'
 import Clock from './Clock'
+import icon_logout from './icon/log_out.svg'
 import './App.css'
 import 'normalize.css'
 import './reset.css'
@@ -48,15 +49,15 @@ class App extends Component {
         {this.state.user.id ? null : <UserDialog onSignUpOrLogIn={this.onSignUpOrLogIn.bind(this)} />}
         <div className='todo-wrapper'>
           <header className='todo-header'>
-            <Clock />
             <h1 className='todo-title'>我的待办
-              {this.state.user.id ? <a onClick={this.onLogOut.bind(this)} href='javascript:void(0)'>退出登录</a> : null}
+              <img src={icon_logout} alt="登出" onClick={this.onLogOut.bind(this)} />
             </h1>
+            <Clock />
           </header>
           <div className='todo-list'>
             <Scrollbar />
             <div className="items-wrapper">
-              <ul>{todos}</ul>
+              <ul>{todos.length === 0 ? <p>添加待办事项</p> : todos}</ul>
             </div>
           </div>
           <TodoInput id='add' content={this.state.newTodo}
@@ -82,9 +83,6 @@ class App extends Component {
   }
   onLogOut() {
     logOut()
-    let state_copy = deepCopyByJSOn(this.state)
-    state_copy.user = {}
-    this.setState(state_copy)
     window.location.reload()
   }
   showScroll() {
