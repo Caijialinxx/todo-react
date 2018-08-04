@@ -2,13 +2,11 @@
   display: none;
   position: absolute;
   right: 0;
-  height: 440px;
+  height: 100%;
   width: 4px;
-  background-color: #eee;
 }
 .scrollBar {
   position: absolute;
-  top: 0%;
   width: inherit;
   height: 0px;
   border-radius: 2px;

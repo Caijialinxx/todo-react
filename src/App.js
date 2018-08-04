@@ -17,6 +17,7 @@ class App extends Component {
     this.state = {
       user: getCurrentUser() || {},
       newTodo: '',
+      todoListHeight: undefined,
       todoList: []
     }
     if (this.state.user.id) {
@@ -25,6 +26,9 @@ class App extends Component {
         state_copy.todoList = items
         this.setState(state_copy)
       }, (error) => { alert(error) })
+    }
+    window.onresize = () => {
+      this.setState({ todoListHeight: $('.items-wrapper').innerHeight() })
     }
   }
   render() {
@@ -51,7 +55,9 @@ class App extends Component {
           </header>
           <div className='todo-list'>
             <Scrollbar />
-            <ul>{todos}</ul>
+            <div className="items-wrapper">
+              <ul>{todos}</ul>
+            </div>
           </div>
           <TodoInput id='add' content={this.state.newTodo}
             onSubmit={this.addItem.bind(this)}
@@ -62,7 +68,7 @@ class App extends Component {
     )
   }
   componentDidMount() {
-    this.showScroll()
+    this.setState({ todoListHeight: $('.items-wrapper').innerHeight() })
   }
   componentDidUpdate() {
     this.showScroll()
@@ -82,13 +88,13 @@ class App extends Component {
     window.location.reload()
   }
   showScroll() {
-    let contentHeight = $('.todo-list ul').outerHeight(true),
+    let contentHeight = $('.items-wrapper ul').innerHeight(),
       scrollTop = undefined
-    if (contentHeight > 440) {
+    if (contentHeight > this.state.todoListHeight) {
       $('.scrollWrapper').css({ display: 'block' })
-      $('.scrollBar').css({ height: `${440 * 440 / contentHeight}px` })
-      $('.todo-list').scroll(function () {
-        scrollTop = $('.todo-list').scrollTop()
+      $('.scrollBar').css({ height: `${this.state.todoListHeight * this.state.todoListHeight / contentHeight}px` })
+      $('.items-wrapper').scroll(() => {
+        scrollTop = $('.items-wrapper').scrollTop()
         $('.scrollBar').css({ top: `${scrollTop / contentHeight * 100}%` })
       })
     } else {
@@ -109,6 +115,8 @@ class App extends Component {
         newTodo: '',
         todoList: state_copy.todoList
       })
+      $('.items-wrapper').scrollTop($('.items-wrapper ul').innerHeight())
+      $('.scrollBar').css({ bottom: `0px` })
     }, (error) => {
       console.error(error)
     })

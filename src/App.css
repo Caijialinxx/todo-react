@@ -24,6 +24,7 @@
   margin: 0 auto;
   max-width: 900px;
   min-width: 360px;
+  min-height: 300px;
   overflow: hidden;
   box-shadow: 0 0 3px 1px #BDBDBD;
 }
@@ -48,12 +49,12 @@
 
 .todo-list {
   flex-grow: 1;
-  color: #757575;
-  font-size: 28px;
-  font-weight: bold;
-  line-height: 418px;
-  text-align: center;
+  height: 0;
+  overflow: hidden;
+  position: relative;
+}
+.todo-list > .items-wrapper {
+  height: 100%;
   overflow-y: scroll;
-  margin-right: -17px;
-  max-height: 440px;
+  margin-right: -18px;
 }
