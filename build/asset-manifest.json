@@ -1,15 +1,18 @@
 {
-  "main.css": "static/css/main.f20bd6cf.css",
-  "main.css.map": "static/css/main.f20bd6cf.css.map",
-  "main.js": "static/js/main.98989006.js",
-  "main.js.map": "static/js/main.98989006.js.map",
+  "main.css": "static/css/main.a6d19764.css",
+  "main.css.map": "static/css/main.a6d19764.css.map",
+  "main.js": "static/js/main.8a4995ca.js",
+  "main.js.map": "static/js/main.8a4995ca.js.map",
   "static\\media\\Kabob.ttf": "static/media/Kabob.b2d0d931.ttf",
   "static\\media\\add.svg": "static/media/add.ff6edd40.svg",
   "static\\media\\bin.svg": "static/media/bin.cebd27de.svg",
   "static\\media\\bottom.svg": "static/media/bottom.c7d0638b.svg",
   "static\\media\\down.svg": "static/media/down.ffa9ab02.svg",
+  "static\\media\\goup.jpg": "static/media/goup.927f3d23.jpg",
+  "static\\media\\log_out.svg": "static/media/log_out.6e4ef4b6.svg",
   "static\\media\\square.svg": "static/media/square.b8eb9b18.svg",
   "static\\media\\square_ok.svg": "static/media/square_ok.e744b8a9.svg",
   "static\\media\\top.svg": "static/media/top.e7187ce3.svg",
-  "static\\media\\up.svg": "static/media/up.8df2366f.svg"
+  "static\\media\\up.svg": "static/media/up.8df2366f.svg",
+  "static\\media\\workhard.jpg": "static/media/workhard.70e7a79e.jpg"
 }
