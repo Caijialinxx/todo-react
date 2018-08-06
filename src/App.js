@@ -16,6 +16,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      isDefaultTheme: true,
       user: getCurrentUser() || {},
       newTodo: '',
       todoListHeight: undefined,
@@ -45,8 +46,22 @@ class App extends Component {
 
     return (
       <div className='App'>
-        <div className='background'></div>
         {this.state.user.id ? null : <UserDialog onSignUpOrLogIn={this.onSignUpOrLogIn.bind(this)} />}
+        <div className='background'></div>
+        <div className='changeTheme' onClick={this.changeTheme.bind(this)}>
+          <figure className='button-outer'>
+            <div className='button-inner'>
+              <div className='cube'>
+                <div className='ballWrapper'>
+                  <div className='ball left'></div>
+                  <div className='ball border'></div>
+                  <div className='ball right'></div>
+                </div>
+                <div className='lightInBall'></div>
+              </div>
+            </div>
+          </figure>
+        </div>
         <div className='todo-wrapper'>
           <header className='todo-header'>
             <h1 className='todo-title'>我的待办
@@ -188,6 +203,20 @@ class App extends Component {
           () => { this.setState(state_copy) },
           (error) => { console.error(error) })
       })
+  }
+  changeTheme() {
+    if (this.state.isDefaultTheme) {
+      $('.button-inner').css({ 'animation-name': 'toRightColor' })
+      $('.ball').css({ 'animation-name': 'slideToRight' })
+      $('.ball.border').css({ 'animation-name': 'rotateToRight' })
+      $('.lightInBall').css({ 'animation-name': 'slideToRight' })
+    } else {
+      $('.button-inner').css({ 'animation-name': 'toLeftColor' })
+      $('.ball').css({ 'animation-name': 'slideToLeft' })
+      $('.ball.border').css({ 'animation-name': 'rotateToLeft' })
+      $('.lightInBall').css({ 'animation-name': 'slideToLeft' })
+    }
+    this.setState({ isDefaultTheme: !this.state.isDefaultTheme })
   }
 }
 
