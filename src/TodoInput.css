@@ -12,6 +12,7 @@
   padding: 16px 0;
 }
 .inputWrapper > input {
+  background-color: inherit;
   cursor: pointer;
   padding: 16px;
   outline: none;

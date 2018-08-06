@@ -7,6 +7,7 @@ import TodoItem from './TodoItem'
 import Scrollbar from './Scrollbar'
 import UserDialog from './UserDialog'
 import Clock from './Clock'
+import ThemeButton from './ThemeThemeButton'
 import icon_logout from './icon/log_out.svg'
 import './App.css'
 import 'normalize.css'
@@ -51,18 +52,7 @@ class App extends Component {
         {this.state.user.id ? null : <UserDialog onSignUpOrLogIn={this.onSignUpOrLogIn.bind(this)} />}
         <div className='background'></div>
         <div className='changeTheme' onClick={this.changeTheme.bind(this)}>
-          <figure className='button-outer'>
-            <div className='button-inner'>
-              <div className='cube'>
-                <div className='ballWrapper'>
-                  <div className='ball left'></div>
-                  <div className='ball border'></div>
-                  <div className='ball right'></div>
-                </div>
-                <div className='lightInBall'></div>
-              </div>
-            </div>
-          </figure>
+          <ThemeButton />
         </div>
         <div className='todo-wrapper'>
           <header className='todo-header'>
@@ -213,18 +203,18 @@ class App extends Component {
       $('.ball.border').css({ 'animation-name': 'rotateToRight' })
       $('.lightInBall').css({ 'animation-name': 'slideToRight' })
 
-      $('.App').css({'background-color': '#000'})
-      $('.background').css({'background-image': `url(${bg_black})`})
-      $('.todo-wrapper').css({'background-color': '#fffffff8'})
+      $('.App').css({ 'background-color': '#000' })
+      $('.background').css({ 'background-image': `url(${bg_black})` })
+      $('.todo-wrapper').css({ 'background-color': '#fffffff8' })
     } else {
       $('.button-inner').css({ 'animation-name': 'toLeftColor' })
       $('.ball').css({ 'animation-name': 'slideToLeft' })
       $('.ball.border').css({ 'animation-name': 'rotateToLeft' })
       $('.lightInBall').css({ 'animation-name': 'slideToLeft' })
 
-      $('.App').css({'background-color': '#eee'})
-      $('.background').css({'background-image': `url(${bg_blue})`})
-      $('.todo-wrapper').css({'background-color': '#fff'})
+      $('.App').css({ 'background-color': '#eee' })
+      $('.background').css({ 'background-image': `url(${bg_blue})` })
+      $('.todo-wrapper').css({ 'background-color': '#fff' })
     }
     this.setState({ isDefaultTheme: !this.state.isDefaultTheme })
   }
