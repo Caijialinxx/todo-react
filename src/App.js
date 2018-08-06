@@ -11,6 +11,8 @@ import icon_logout from './icon/log_out.svg'
 import './App.css'
 import 'normalize.css'
 import './reset.css'
+import bg_blue from './images/workhard.jpg'
+import bg_black from './images/goup.jpg'
 
 class App extends Component {
   constructor(props) {
@@ -210,11 +212,19 @@ class App extends Component {
       $('.ball').css({ 'animation-name': 'slideToRight' })
       $('.ball.border').css({ 'animation-name': 'rotateToRight' })
       $('.lightInBall').css({ 'animation-name': 'slideToRight' })
+
+      $('.App').css({'background-color': '#000'})
+      $('.background').css({'background-image': `url(${bg_black})`})
+      $('.todo-wrapper').css({'background-color': '#fffffff8'})
     } else {
       $('.button-inner').css({ 'animation-name': 'toLeftColor' })
       $('.ball').css({ 'animation-name': 'slideToLeft' })
       $('.ball.border').css({ 'animation-name': 'rotateToLeft' })
       $('.lightInBall').css({ 'animation-name': 'slideToLeft' })
+
+      $('.App').css({'background-color': '#eee'})
+      $('.background').css({'background-image': `url(${bg_blue})`})
+      $('.todo-wrapper').css({'background-color': '#fff'})
     }
     this.setState({ isDefaultTheme: !this.state.isDefaultTheme })
   }
