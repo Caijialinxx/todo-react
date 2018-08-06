@@ -2,6 +2,7 @@
   height: 100vh;
   width: 100vw;
   background-color: #eee;
+  transition: background-color 0.3s;
 }
 
 .background {
@@ -9,6 +10,7 @@
   background-image: url(./images/workhard.jpg);
   background-position: center;
   background-size: cover;
+  transition: background 0.3s;
 }
 
 .todo-wrapper {
@@ -28,6 +30,7 @@
   overflow: hidden;
   box-shadow: 0 0 20px 1px #d4e7ff;
   border-radius: 4px;
+  transition: all 0.3s;
 }
 
 .todo-header {

@@ -54,7 +54,7 @@
 
 /* animation */
 .button-inner, .ball, .lightInBall {
-  animation-duration: 0.5s;
+  animation-duration: 0.3s;
   animation-timing-function: ease-in-out;
   animation-fill-mode: both;
 }
