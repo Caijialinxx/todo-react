@@ -1,12 +1,12 @@
 import React from 'react'
 import './TodoItem.css'
-import icon_undone from './icon/square.svg'
-import icon_done from './icon/square_ok.svg'
-import icon_delete from './icon/bin.svg'
-import icon_top from './icon/top.svg'
-import icon_up from './icon/up.svg'
-import icon_down from './icon/down.svg'
-import icon_bottom from './icon/bottom.svg'
+import icon_undone from './icon/square.png'
+import icon_done from './icon/square_ok.png'
+import icon_delete from './icon/bin.png'
+import icon_top from './icon/top.png'
+import icon_up from './icon/up.png'
+import icon_down from './icon/down.png'
+import icon_bottom from './icon/bottom.png'
 
 export default function (props) {
   let statusImg = props.todo.status === 'undone' ? icon_undone : icon_done

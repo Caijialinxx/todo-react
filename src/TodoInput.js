@@ -1,6 +1,6 @@
 import React from 'react'
 import './TodoInput.css'
-import icon_add from './icon/add.svg'
+import icon_add from './icon/add.png'
 
 export default function (props) {
   return (
