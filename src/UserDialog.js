@@ -74,9 +74,8 @@ class UserDialog extends Component {
     }
   }
   changeFormData(e) {
-    let state_copy = JSON.parse(JSON.stringify(this.state)),
-      key = e.target.type === 'text' ? 'email' : 'password'
-    state_copy.formData[key] = e.target.value
+    let state_copy = JSON.parse(JSON.stringify(this.state))
+    state_copy.formData[e.target.type] = e.target.value
     this.setState(state_copy)
   }
 }

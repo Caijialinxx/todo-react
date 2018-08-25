@@ -5,7 +5,7 @@ export default function (props) {
     <form id='signupForm' onSubmit={props.onSubmit}>
       <div>
         <label>邮箱:</label>
-        <input type='text' value={props.formData.email} onChange={props.onChange} placeholder='请设置邮箱作为登录账号' />
+        <input type='email' value={props.formData.email} onChange={props.onChange} placeholder='请设置邮箱作为登录账号' />
       </div>
       <div>
         <label>密码:</label>

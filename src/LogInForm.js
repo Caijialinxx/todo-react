@@ -5,7 +5,7 @@ export default function (props) {
     <form id='loginForm' onSubmit={props.onSubmit}>
       <div>
         <label>邮箱:</label>
-        <input type='text' value={props.formData.email} onChange={props.onChange} />
+        <input type='email' value={props.formData.email} onChange={props.onChange} />
       </div>
       <div>
         <label>密码:</label>
