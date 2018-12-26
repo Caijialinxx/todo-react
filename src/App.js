@@ -223,13 +223,12 @@ class App extends Component {
 export default App
 
 function swap(arr, currentIndex, targetIndex) {
+  let deleted = arr.splice(currentIndex, 1)[0]
   if (Math.abs(targetIndex - currentIndex) === 1) {
     arr[targetIndex] = arr.splice(currentIndex, 1, arr[targetIndex])[0]
   } else if (targetIndex - currentIndex > 1) {
-    var deleted = arr.splice(currentIndex, 1)[0]
     arr.push(deleted)
   } else if (targetIndex - currentIndex < -1) {
-    var deleted = arr.splice(currentIndex, 1)[0]
     arr.unshift(deleted)
   }
   return arr

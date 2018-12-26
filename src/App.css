@@ -66,6 +66,9 @@
   overflow-y: scroll;
   margin-right: -18px;
 }
+.todo-list > .items-wrapper ul {
+  margin-right: 18px;
+}
 .todo-list > .items-wrapper p {
   color: #ddd;
   font-size: 20px;

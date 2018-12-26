@@ -6,7 +6,7 @@ export default function (props) {
       <h1>重置密码</h1>
       <div>
         <label>邮箱:</label>
-        <input type='text' value={props.formData.email} onChange={props.onChange} placeholder='注册的邮箱（即登录账号）' />
+        <input type='email' value={props.formData.email} onChange={props.onChange} placeholder='注册的邮箱（即登录账号）' />
       </div>
       <div className='options'>
         <a onClick={props.onShow} href='javascript:void(0)'>返回登录</a>
