@@ -1,8 +1,7 @@
 import AV from 'leancloud-storage';
+import lc from './private'
 
-let APP_ID = '4Sd2Vkpni8g9EB3wVuTzFAvt-gzGzoHsz'
-let APP_KEY = 'YyPdXBvVa8Vj9k4lwRA7JdcL'
-AV.init({ appId: APP_ID, appKey: APP_KEY })
+AV.init({ appId: lc.id, appKey: lc.key })
 
 export const TodoModel = {
   fetch(successFn, errorFn) {
@@ -26,6 +25,8 @@ export const TodoModel = {
       todo.set('order', item.order)
       todo.set('content', item.content)
       todo.set('status', item.status)
+      todo.set('reminder', null)
+      todo.set('overdue', null)
 
       let acl = new AV.ACL()
       acl.setPublicReadAccess(false)
@@ -49,7 +50,7 @@ export const TodoModel = {
   update(type, item, successFn, errorFn) {
     let todo = AV.Object.createWithoutData('Todo', item.id)
     if (type === 'status') {
-      item.status = item.status === 'undone' ? 'done' : 'undone'
+      item.status = item.status === 'undone' ? 'success' : 'undone'
       todo.set('status', item.status);
     } else {
       todo.set('order', item.order);
