@@ -15,7 +15,7 @@ export default function (props) {
     <li>
       <div className='itemWrapper' onClick={toggle.bind(null, props)}>
         <img src={statusImg} alt='status' />
-        <span className={props.todo.status}>{props.todo.content}</span>
+        <span className={props.todo.status === 'success' ? 'done' : 'undone'}>{props.todo.content}</span>
       </div>
       <div className='optionsWrapper'>
         <img src={icon_top} alt='top' onClick={top.bind(undefined, props)} />
